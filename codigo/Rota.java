@@ -2,11 +2,17 @@ import java.util.Date;
 
 public class Rota {
     private Date data;
-    private double distanciaTotal;
 
-    Rota(Date data, double distanciaTotal) {
+
+    private double distancia;
+
+    Rota(Date data, double distancia) {
         this.data = data;
-        this.distanciaTotal = distanciaTotal;
+        this.distancia = distancia;
+    }
+
+    public double getDistancia() {
+        return distancia;
     }
 
 }
