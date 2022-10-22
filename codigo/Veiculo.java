@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public abstract class Veiculo {
@@ -18,9 +17,9 @@ public abstract class Veiculo {
 
     protected abstract double calcularOutrosCustos();
 
-    public double calculaDistanciaTotal() {
+    protected double calculaDistanciaTotal() {
         double distanciaTotal = 0;
-        for (Rota rota : listaRotas) {
+        for (Rota rota : this.listaRotas) {
             distanciaTotal += rota.getDistancia();
         }
         return distanciaTotal;
@@ -28,7 +27,11 @@ public abstract class Veiculo {
 
     public void incluirRota(Rota novaRota) {
         listaRotas.add(novaRota);
+        kmPercorridos = calculaDistanciaTotal();
     }
 
+    protected double retornaAcadaXMilQuilometros(double quantidadeKm) {
+        return kmPercorridos % quantidadeKm;
+    }
 
 }

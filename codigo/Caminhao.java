@@ -1,12 +1,15 @@
 import java.util.ArrayList;
 
-public class Carro extends Veiculo {
-    private static final double IPVA_CARRO = 0.4;
-    private static final double TAXA_SEGURO = 0.05;
+public class Caminhao extends Veiculo {
+    private static final double IPVA_CAMINHAO = 0.01;
+    private static final double SEGURO_CAMINHAO = 0.02;
+    private static final double MANUTENCAO = 1000;
+    private static final double VISTORIA = 1000;
 
-    Carro(double valorVeiculo, double quilometragremMedia) {
+    Caminhao(
+            double valorVeiculo, double quilometragremMedia) {
         this.valorVeiculo = valorVeiculo;
-        this.capacidadeTanque = 50;
+        this.capacidadeTanque = 250;
         this.quilometragremMedia = quilometragremMedia;
         this.ipva = calcularIpva();
         this.seguro = calcularSeguro();
@@ -17,16 +20,17 @@ public class Carro extends Veiculo {
 
     @Override
     protected double calcularIpva() {
-        return valorVeiculo * IPVA_CARRO;
+        return 0;
     }
 
     @Override
     protected double calcularSeguro() {
-        return valorVeiculo * TAXA_SEGURO + 300;
+        return 0;
     }
 
     @Override
     protected double calcularOutrosCustos() {
-        return 80 * (calculaDistanciaTotal() % 1000);
+        return MANUTENCAO* retornaAcadaXMilQuilometros(20000) + VISTORIA *retornaAcadaXMilQuilometros(30000);
     }
+
 }
