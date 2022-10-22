@@ -1,15 +1,16 @@
 import java.util.ArrayList;
 
 public abstract class Veiculo {
+    protected static double idVeiculo = 0;
     protected double valorVeiculo;
     protected double capacidadeTanque;
-
     protected double autonomiaDiaria;
     protected ArrayList<Rota> listaRotas;
     protected double quilometragremMedia;
     protected double ipva;
     protected double seguro;
     protected double kmPercorridos;
+    protected double custosExtras;
 
     protected abstract double calcularIpva();
 
@@ -34,4 +35,8 @@ public abstract class Veiculo {
         return kmPercorridos % quantidadeKm;
     }
 
+    @Override
+    public String toString() {
+        return this.getClass() + "Tanque: " + capacidadeTanque + "IPVA: " + ipva + "Seguro: " + seguro + "Outros Custos: " + custosExtras;
+    }
 }

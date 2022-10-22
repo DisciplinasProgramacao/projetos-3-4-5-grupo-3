@@ -5,6 +5,7 @@ public class Carro extends Veiculo {
     private static final double TAXA_SEGURO = 0.05;
 
     Carro(double valorVeiculo, double quilometragremMedia) {
+        idVeiculo++;
         this.valorVeiculo = valorVeiculo;
         this.capacidadeTanque = 50;
         this.quilometragremMedia = quilometragremMedia;

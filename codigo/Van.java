@@ -7,6 +7,7 @@ public class Van extends Veiculo {
     private static final double ALINHAMENTO = 120;
 
     Van(double valorVeiculo, double quilometragremMedia) {
+        idVeiculo++;
         this.valorVeiculo = valorVeiculo;
         this.capacidadeTanque = 60;
         this.quilometragremMedia = quilometragremMedia;

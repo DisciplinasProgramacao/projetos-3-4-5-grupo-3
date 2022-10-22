@@ -8,6 +8,7 @@ public class Furgao extends Veiculo {
 
     Furgao(
             double valorVeiculo, double quilometragremMedia) {
+        idVeiculo++;
         this.valorVeiculo = valorVeiculo;
         this.capacidadeTanque = 80;
         this.quilometragremMedia = quilometragremMedia;
