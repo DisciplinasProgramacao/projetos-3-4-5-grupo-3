@@ -12,9 +12,10 @@ public abstract class Veiculo {
     protected double precoSeguro;
     protected double kmPercorridos;
     protected double custosExtras;
+    private final double taxaIPVA;
+    private final double taxaSeguro;
 
-
-    protected Veiculo(double valorVeiculo, double kmMedia, double capacidadeTanque) {
+    protected Veiculo(double valorVeiculo, double kmMedia, double capacidadeTanque, double taxaIPVA, double taxaSeguro) {
         aumentaQuantidadeVeiculos();
         this.capacidadeTanque = capacidadeTanque;
         this.valor = valorVeiculo;
@@ -24,12 +25,18 @@ public abstract class Veiculo {
         this.custosExtras = calcularOutrosCustos();
         this.ipva = calcularIpva();
         this.precoSeguro = calcularSeguro();
+        this.taxaIPVA = taxaIPVA;
+        this.taxaSeguro = taxaSeguro;
     }
 
 
-    protected abstract double calcularIpva();
+    protected double calcularIpva() {
+        return taxaIPVA * valor;
+    }
 
-    protected abstract double calcularSeguro();
+    protected double calcularSeguro(){
+        return taxaSeguro * valor;
+    }
 
     protected abstract double calcularOutrosCustos();
 

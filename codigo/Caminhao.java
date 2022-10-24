@@ -6,12 +6,8 @@ public class Caminhao extends Veiculo {
     private static final double VALOR_VISTORIA = 1000;
 
     Caminhao(double valorVeiculo, double quilometragremMedia) {
-        super(valorVeiculo, quilometragremMedia, CAPACIDADE_TANQUE);
-
+        super(valorVeiculo, quilometragremMedia, CAPACIDADE_TANQUE, TAXA_IPVA, TAXA_SEGURO);
     }
-
-    @Override
-    protected double calcularIpva() {return TAXA_IPVA * valor;}
 
     @Override
     protected double calcularSeguro() {
