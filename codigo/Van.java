@@ -6,11 +6,11 @@ public class Van extends Veiculo {
     private static final double VISTORIA = 500;
     private static final double ALINHAMENTO = 120;
 
-    Van(double valorVeiculo, double quilometragremMedia) {
+    public Van(double valorVeiculo, double quilometragremMedia) {
         idVeiculo++;
         this.valorVeiculo = valorVeiculo;
         this.capacidadeTanque = 60;
-        this.quilometragremMedia = quilometragremMedia;
+        this.quilometragremMediaPorLitro = quilometragremMedia;
         this.ipva = calcularIpva();
         this.seguro = calcularSeguro();
         autonomiaDiaria = quilometragremMedia * capacidadeTanque;
@@ -29,7 +29,7 @@ public class Van extends Veiculo {
     }
 
     @Override
-    protected double calcularOutrosCustos() {
+    protected double getOutrosCustos() {
         return (ALINHAMENTO * retornaAcadaXMilQuilometros(10000)) + (VISTORIA * retornaAcadaXMilQuilometros(10000));
     }
 

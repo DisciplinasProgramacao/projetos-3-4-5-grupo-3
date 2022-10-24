@@ -8,7 +8,7 @@ public class Carro extends Veiculo {
         idVeiculo++;
         this.valorVeiculo = valorVeiculo;
         this.capacidadeTanque = 50;
-        this.quilometragremMedia = quilometragremMedia;
+        this.quilometragremMediaPorLitro = quilometragremMedia;
         this.ipva = calcularIpva();
         this.seguro = calcularSeguro();
         autonomiaDiaria = quilometragremMedia * capacidadeTanque;
@@ -27,7 +27,7 @@ public class Carro extends Veiculo {
     }
 
     @Override
-    protected double calcularOutrosCustos() {
+    protected double getOutrosCustos() {
         return 80 * (calculaDistanciaTotal() % 1000);
     }
 }

@@ -6,12 +6,11 @@ public class Furgao extends Veiculo {
     private static final double ALINHAMENTO_FURGAO = 120;
     private static final double VISTORIA_FURGAO = 500;
 
-    Furgao(
-            double valorVeiculo, double quilometragremMedia) {
+    public Furgao(double valorVeiculo, double quilometragremMedia) {
         idVeiculo++;
         this.valorVeiculo = valorVeiculo;
         this.capacidadeTanque = 80;
-        this.quilometragremMedia = quilometragremMedia;
+        this.quilometragremMediaPorLitro = quilometragremMedia;
         this.ipva = calcularIpva();
         this.seguro = calcularSeguro();
         autonomiaDiaria = quilometragremMedia * capacidadeTanque;
@@ -30,7 +29,7 @@ public class Furgao extends Veiculo {
     }
 
     @Override
-    protected double calcularOutrosCustos() {
+    protected double getOutrosCustos() {
         return (ALINHAMENTO_FURGAO * retornaAcadaXMilQuilometros(10000)) + (VISTORIA_FURGAO + retornaAcadaXMilQuilometros(10000));
     }
 }

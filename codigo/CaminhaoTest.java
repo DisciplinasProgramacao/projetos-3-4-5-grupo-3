@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Assertions;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import java.util.Date;
 
@@ -16,7 +16,7 @@ public class CaminhaoTest {
 
     @Test
     public void calculaSeguroCerto() {
-        assertEquals(2020, caminhao.calcularSeguro());
+        assertEquals(2020, caminhao.getSeguro());
     }
 
     @Test
