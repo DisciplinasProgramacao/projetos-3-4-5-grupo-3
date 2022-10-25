@@ -1,36 +1,20 @@
 import java.util.ArrayList;
 
 public class Van extends Veiculo {
-    private static final double IPVA_VAN = 0.03;
-    private static final double SEGURO_VAN = 0.03;
-    private static final double VISTORIA = 500;
-    private static final double ALINHAMENTO = 120;
+    private static final double VALOR_ALINHAMENTO = 120;
+    private static final double VALOR_VISTORIA = 500;
 
     public Van(double valorVeiculo, double quilometragremMedia) {
-        idVeiculo++;
-        this.valorVeiculo = valorVeiculo;
-        this.capacidadeTanque = 60;
-        this.quilometragremMediaPorLitro = quilometragremMedia;
-        this.ipva = calcularIpva();
-        this.seguro = calcularSeguro();
-        autonomiaDiaria = quilometragremMedia * capacidadeTanque;
-        ArrayList<Rota> listaRotas;
-        kmPercorridos = 0;
-    }
-
-    @Override
-    protected double calcularIpva() {
-        return valorVeiculo * IPVA_VAN;
-    }
-
-    @Override
-    protected double calcularSeguro() {
-        return valorVeiculo * SEGURO_VAN;
+        super(valorVeiculo, quilometragremMedia, 60, 0.03, 0.03);
     }
 
     @Override
     protected double getOutrosCustos() {
-        return (ALINHAMENTO * retornaAcadaXMilQuilometros(10000)) + (VISTORIA * retornaAcadaXMilQuilometros(10000));
+        return VALOR_ALINHAMENTO * retornaAcadaXMilQuilometros(10000) + VALOR_VISTORIA * retornaAcadaXMilQuilometros(10000);
     }
 
+    @Override
+    public double getPrecoSeguro() {
+        return taxaSeguro * valor;
+    }
 }

@@ -1,35 +1,19 @@
-import java.util.ArrayList;
-
 public class Furgao extends Veiculo {
-    private static final double IPVA_FURGAO = 0.03;
-    private static final double SEGURO_FURGAO = 0.03;
-    private static final double ALINHAMENTO_FURGAO = 120;
-    private static final double VISTORIA_FURGAO = 500;
+    
+    private static final double VALOR_ALINHAMENTO = 120;
+    private static final double VALOR_VISTORIA = 500;
 
     public Furgao(double valorVeiculo, double quilometragremMedia) {
-        idVeiculo++;
-        this.valorVeiculo = valorVeiculo;
-        this.capacidadeTanque = 80;
-        this.quilometragremMediaPorLitro = quilometragremMedia;
-        this.ipva = calcularIpva();
-        this.seguro = calcularSeguro();
-        autonomiaDiaria = quilometragremMedia * capacidadeTanque;
-        ArrayList<Rota> listaRotas;
-        kmPercorridos = 0;
-    }
-
-    @Override
-    protected double calcularIpva() {
-        return valorVeiculo * IPVA_FURGAO;
-    }
-
-    @Override
-    protected double calcularSeguro() {
-        return valorVeiculo * SEGURO_FURGAO;
+        super(valorVeiculo, quilometragremMedia, 50, 0.03, 0.03);
     }
 
     @Override
     protected double getOutrosCustos() {
-        return (ALINHAMENTO_FURGAO * retornaAcadaXMilQuilometros(10000)) + (VISTORIA_FURGAO + retornaAcadaXMilQuilometros(10000));
+        return VALOR_ALINHAMENTO * retornaAcadaXMilQuilometros(10000) + VALOR_VISTORIA * retornaAcadaXMilQuilometros(10000);
+    }
+
+    @Override
+    public double getPrecoSeguro() {
+        return taxaSeguro * valor;
     }
 }
