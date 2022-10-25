@@ -19,6 +19,6 @@ public class Caminhao extends Veiculo {
 
     @Override
     public double getPrecoSeguro() {
-        return taxaSeguro * valor + 200;
+        return taxaSeguro * valor + 2000;
     }
 }

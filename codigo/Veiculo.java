@@ -53,8 +53,17 @@ public abstract class Veiculo {
         return capacidadeTanque * quilometragremMediaPorLitro;
     }
 
-    protected double retornaAcadaXMilQuilometros(double quantidadeKm) {
-        return Math.ceil((int) kmPercorridos / quantidadeKm);
+    public double getKmcorridos(){
+        double kmPercorridos = 0;
+        for (Rota rota : listaRotas) {
+            kmPercorridos += rota.getDistancia();
+        }
+        return kmPercorridos;
+    }
+    protected int retornaAcadaXMilQuilometros(double quantidadeKm) {
+        double a = getKmcorridos() /quantidadeKm;
+        double b = getKmcorridos();
+        return (int) (getKmcorridos() /quantidadeKm);
     }
 
     @Override
