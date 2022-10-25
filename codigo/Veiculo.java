@@ -61,8 +61,6 @@ public abstract class Veiculo {
         return kmPercorridos;
     }
     protected int retornaAcadaXMilQuilometros(double quantidadeKm) {
-        double a = getKmcorridos() /quantidadeKm;
-        double b = getKmcorridos();
         return (int) (getKmcorridos() /quantidadeKm);
     }
 

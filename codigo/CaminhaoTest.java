@@ -1,5 +1,3 @@
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Assertions;
 import org.junit.Test;
 
 import java.util.Date;
@@ -9,11 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CaminhaoTest {
+    
     static Caminhao caminhao = new Caminhao(1000, 5);
-    //@BeforeAll
-    //public static void inicializa(){
-        //caminhao = new Caminhao(1000, 5);
-    //}
 
     @Test
     public void calculaIpvaCerto() {

@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Van extends Veiculo {
     private static final double VALOR_ALINHAMENTO = 120;
     private static final double VALOR_VISTORIA = 500;
