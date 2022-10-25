@@ -2,14 +2,17 @@ public class Furgao extends Veiculo {
     
     private static final double VALOR_ALINHAMENTO = 120;
     private static final double VALOR_VISTORIA = 500;
-
+    private static final double CAPACIDADE_TANQUE = 80;
+    private static final double TAXA_IPVA = 0.03;
+    private static final double TAXA_SEGURO = 0.03;
+    private static final double KM_NECESSARIO_VISTORIA= 10000;
     public Furgao(double valorVeiculo, double quilometragremMedia) {
-        super(valorVeiculo, quilometragremMedia, 80, 0.03, 0.03);
+        super(valorVeiculo, quilometragremMedia, CAPACIDADE_TANQUE, TAXA_IPVA,TAXA_SEGURO);
     }
 
     @Override
     protected double getOutrosCustos() {
-        return VALOR_ALINHAMENTO * retornaAcadaXMilQuilometros(10000) + VALOR_VISTORIA * retornaAcadaXMilQuilometros(10000);
+        return VALOR_ALINHAMENTO * retornaAcadaXMilQuilometros(KM_NECESSARIO_VISTORIA) + VALOR_VISTORIA * retornaAcadaXMilQuilometros(10000);
     }
 
     @Override
