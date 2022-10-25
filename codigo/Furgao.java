@@ -4,7 +4,7 @@ public class Furgao extends Veiculo {
     private static final double VALOR_VISTORIA = 500;
 
     public Furgao(double valorVeiculo, double quilometragremMedia) {
-        super(valorVeiculo, quilometragremMedia, 50, 0.03, 0.03);
+        super(valorVeiculo, quilometragremMedia, 80, 0.03, 0.03);
     }
 
     @Override

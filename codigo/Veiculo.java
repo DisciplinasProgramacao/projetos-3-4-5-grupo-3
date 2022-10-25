@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public abstract class Veiculo {
+    
     protected int id;
     protected double valor;
     protected double capacidadeTanque;
