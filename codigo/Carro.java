@@ -1,5 +1,6 @@
 public class Carro extends Veiculo {
     //#region Atributos
+    private static final String TIPO = "Carro";
     private static final double VALOR_ALINHAMENTO = 80;
     private static final double CAPACIDADE_TANQUE = 50;
     private static final double TAXA_IPVA = 0.04;
@@ -9,8 +10,8 @@ public class Carro extends Veiculo {
 
     //#endregion
     //#region Construtor
-    public Carro(double valorVeiculo, double quilometragremMedia) {
-        super(valorVeiculo, quilometragremMedia, CAPACIDADE_TANQUE, TAXA_IPVA, TAXA_SEGURO);
+    public Carro(double valorVeiculo, String placa, double quilometragremMedia) {
+        super(TIPO, placa, valorVeiculo, quilometragremMedia, CAPACIDADE_TANQUE, TAXA_IPVA, TAXA_SEGURO);
     }
 
     //#endregion

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class VanTest {
 
-    static Van van = new Van(1000, 5);
+    static Van van = new Van(1000,"FRNG6X1", 5);
 
     @Test
     public void calculaIpvaCerto() {
@@ -27,7 +27,7 @@ public class VanTest {
     public void calculaCustosCerto() {
         int distanciaRota = 300;
         for (int i = 0; i <= 34; i++) {
-            van.addRota(new Rota("04/11/2011", distanciaRota));
+            van.addRota(new Rota("4/11/2011", distanciaRota));
         }
         assertEquals(620, van.getOutrosCustos());
     }
