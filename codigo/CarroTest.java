@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CarroTest {
 
-    static Carro carro = new Carro(1000, 5);
+    static Carro carro = new Carro(1000,"FRNG6X1", 5);
 
     @Test
     public void calculaIpvaCerto() {
@@ -19,14 +19,14 @@ public class CarroTest {
 
     @Test
     public void adicionaRotaCorreta() {
-        assertTrue(carro.addRota(new Rota("04/11/2011", 250)));
-        assertFalse(carro.addRota(new Rota("04/11/2011", 500)));
+        assertTrue(carro.addRota(new Rota("04/12/2011", 250)));
+        assertFalse(carro.addRota(new Rota("04/12/2011", 500)));
     }
 
     @Test
     public void calculaCustosCerto() {
         for (int i = 0; i < 40; i++) {
-            carro.addRota(new Rota("04/11/2011", 250));
+            carro.addRota(new Rota("04/12/2011", 250));
         }
         assertEquals(80, carro.getOutrosCustos());
     }

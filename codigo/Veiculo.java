@@ -2,7 +2,8 @@ import java.util.ArrayList;
 
 public abstract class Veiculo {
     //#region Atributos
-
+    protected final String tipo;
+    protected final String placa;
     protected double valor;
     protected double capacidadeTanque;
     protected final double quilometragremMediaPorLitro;
@@ -13,7 +14,9 @@ public abstract class Veiculo {
 
     //#endregion
     //#region Construtor
-    public Veiculo(double valorVeiculo, double kmMedia, double capacidadeTanque, double taxaIPVA, double taxaSeguro) {
+    protected Veiculo(String tipo, String placa, double valorVeiculo, double kmMedia, double capacidadeTanque, double taxaIPVA, double taxaSeguro) {
+        this.tipo = tipo;
+        this.placa = placa;
         this.capacidadeTanque = capacidadeTanque;
         this.valor = valorVeiculo;
         listaRotas = new ArrayList<>();

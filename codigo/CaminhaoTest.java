@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CaminhaoTest {
 
-    static Caminhao caminhao = new Caminhao(1000, 5);
+    static Caminhao caminhao = new Caminhao(1000,"FRNG6X1", 5);
 
     @Test
     public void calculaIpvaCerto() {
