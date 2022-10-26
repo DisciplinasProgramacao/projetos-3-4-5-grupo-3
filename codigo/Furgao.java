@@ -15,4 +15,7 @@ public class Furgao extends Veiculo {
         return VALOR_ALINHAMENTO * quantidadeServicoKMTotal(KM_NECESSARIO_VISTORIA) + VALOR_VISTORIA * quantidadeServicoKMTotal(KM_NECESSARIO_VISTORIA);
     }
 
+    public static double getCapacidadeTanque() {
+        return CAPACIDADE_TANQUE;
+    }
 }

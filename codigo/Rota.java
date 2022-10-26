@@ -6,7 +6,6 @@ public class Rota {
     private final double distancia;
 
     Rota(Date data, double distancia) {
-        this.data = data;
         this.distancia = distancia;
     }
 

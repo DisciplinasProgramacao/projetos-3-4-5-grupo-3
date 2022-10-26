@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,13 +24,15 @@ public class Main {
                     System.out.println("oi");
                     break;
                 case 3:
+                    inserirVeiculo();
+                    break;
 
 
             }
         }
     }
 
-    private static void carregarArquivo() {
+    public static void carregarArquivo() {
         String arquivo = "/Users/Matheus/Desktop/PUC 2022.2/LaboratorioModular/Veiculos.txt";
         String txt = Arquivo.Read(arquivo);
         if (txt.isEmpty()) {
@@ -39,18 +42,67 @@ public class Main {
         }
     }
 
-    private static void inserirVeiculo() {
+    public static void inserirVeiculo() {
         Scanner teclado = new Scanner(System.in);
-        System.out.println("Escolha qual tipo de veículo você deseja inserir:\n" +
-                "[1] -> Carro\n" +
-                "[2] -> Van\n" +
-                "[3] -> Furgão\n" +
-                "[4] -> Caminhão");
-        int escolhaVeiculo = teclado.nextInt();
-        switch (escolhaVeiculo) {
-            case 1:
+        int escolhaVeiculo = 1;
+        while (escolhaVeiculo > 0 && escolhaVeiculo <= 4) {
+            System.out.println("Escolha qual tipo de veículo você deseja inserir:\n" +
+                    "[1] -> Carro\n" +
+                    "[2] -> Van\n" +
+                    "[3] -> Furgão\n" +
+                    "[4] -> Caminhão\n"+
+                    "[0] -> Sair do menu");
+            escolhaVeiculo = teclado.nextInt();
+            switch (escolhaVeiculo) {
+                case 1:
+                    System.out.println("Informe o valor da venda: ");
+                    double valorVendaCarro = teclado.nextDouble();
+                    System.out.println("Informe a quilometragem média: ");
+                    double quilometragemMediaCarro = teclado.nextDouble();
+                    Veiculo novoCarro = new Carro(valorVendaCarro, quilometragemMediaCarro);
+                    System.out.println("Valor da venda -> " + valorVendaCarro + "Quilometragem Média -> " + quilometragemMediaCarro
+                            + "Capacidade do tanque -> " + Carro.getCapacidadeTanque());
+                    break;
+                case 2:
+                    System.out.println("Informe o valor da venda: ");
+                    double valorVendaVan = teclado.nextDouble();
+                    System.out.println("Informe a quilometragem média: ");
+                    double quilometragemMediaVan = teclado.nextDouble();
+                    Veiculo novoVan = new Van(valorVendaVan, quilometragemMediaVan);
+                    System.out.println("Valor da venda -> " + valorVendaVan + "Quilometragem Média -> " + quilometragemMediaVan
+                            + "Capacidade do tanque -> " + Van.getCapacidadeTanque());
+                    break;
+                case 3:
+                    System.out.println("Informe o valor da venda: ");
+                    double valorVendaFurgao = teclado.nextDouble();
+                    System.out.println("Informe a quilometragem média: ");
+                    double quilometragemMediaFurgao = teclado.nextDouble();
+                    Veiculo novoFurgao = new Furgao(valorVendaFurgao, quilometragemMediaFurgao);
+                    System.out.println("Valor da venda -> " + valorVendaFurgao + "Quilometragem Média -> " + quilometragemMediaFurgao
+                            + "Capacidade do tanque -> " + Furgao.getCapacidadeTanque());
+                    break;
+                case 4:
+                    System.out.println("Informe o valor da venda: ");
+                    double valorVendaCaminhao = teclado.nextDouble();
+                    System.out.println("Informe a quilometragem média: ");
+                    double quilometragemMediaCaminhao = teclado.nextDouble();
+                    Veiculo novoCaminhao = new Caminhao(valorVendaCaminhao, quilometragemMediaCaminhao);
+                    System.out.println("Valor da venda -> " + valorVendaCaminhao + "Quilometragem Média -> " + quilometragemMediaCaminhao
+                            + "Capacidade do tanque -> " + Caminhao.getCapacidadeTanque());
+                    break;
 
+            }
         }
     }
 
+    /*public static void inserirRota(){
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Forneça a data da rota: ");
+        Date data = teclado.nextLine();
+        System.out.println("Insira a distância da rota:");
+        double distancia = teclado.nextDouble();
+        Rota novaRota = new Rota(data, distancia);
+        Veiculo.addRota(novaRota);
+
+    } */
 }

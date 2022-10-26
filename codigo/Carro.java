@@ -25,4 +25,7 @@ public class Carro extends Veiculo {
         return taxaSeguro * valor + TAXA_EXTRA_SEGURO;
     }
     //#endregion
+    public static double getCapacidadeTanque() {
+        return CAPACIDADE_TANQUE;
+    }
 }

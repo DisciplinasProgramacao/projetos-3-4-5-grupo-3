@@ -22,4 +22,8 @@ public class Caminhao extends Veiculo {
     public double calcularSeguro() {
         return taxaSeguro * valor + TAXA_EXTRA_SEGURO;
     }
+
+    public static double getCapacidadeTanque() {
+        return CAPACIDADE_TANQUE;
+    }
 }

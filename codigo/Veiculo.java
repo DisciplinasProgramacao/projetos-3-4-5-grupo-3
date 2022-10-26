@@ -102,6 +102,7 @@ public abstract class Veiculo {
     public String toString() {
         return this.getClass() + "Tanque: " + capacidadeTanque + " IPVA: " + getIpva() + " Seguro: " + calcularSeguro() + " Outros Custos: " + getOutrosCustos();
     }
+
     //endregion
     //endregion
 }
