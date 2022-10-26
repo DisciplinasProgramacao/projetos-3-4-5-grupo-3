@@ -5,6 +5,7 @@ public class Carro extends Veiculo {
     private static final double TAXA_IPVA = 0.04;
     private static final double TAXA_SEGURO = 0.05;
     private static final double KM_NECESSARIO_VISTORIA= 10000;
+    private static final double TAXA_ADICIONAL_SEGURO = 300;
 
     public Carro(double valorVeiculo, double quilometragremMedia) {
         super(valorVeiculo, quilometragremMedia, CAPACIDADE_TANQUE,TAXA_IPVA, TAXA_SEGURO);
@@ -17,6 +18,6 @@ public class Carro extends Veiculo {
 
     @Override
     public double getPrecoSeguro() {
-        return taxaSeguro * valor + 300;
+        return TAXA_SEGURO * valor + TAXA_ADICIONAL_SEGURO;
     }
 }

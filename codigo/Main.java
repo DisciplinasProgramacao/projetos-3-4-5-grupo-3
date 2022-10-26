@@ -5,8 +5,7 @@ public class Main {
         int escolha = 1;
         while (escolha!=0) {
             Scanner teclado = new Scanner(System.in);
-            System.out.println("------MENU------");
-            System.out.println("Escolha uma opção: ");
+            System.out.println("------MENU------\nEscolha uma opção: ");
             System.out.println("[1] -> Carregar um conjunto de veículos de um arquivo ");
             System.out.println("[2] -> Salvar um conjunto de veículos de um arquivo");
             System.out.println("[3] -> Incluir um novo veículo");
@@ -21,6 +20,10 @@ public class Main {
                     break;
 
                 case 2:
+                    System.out.println("oi");
+                    break;
+                case 3:
+
 
             }
         }
@@ -33,6 +36,20 @@ public class Main {
             System.out.println("Não existe nenhum veículo cadastrado");
         } else {
             System.out.println(txt);
+        }
+    }
+
+    private static void inserirVeiculo() {
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Escolha qual tipo de veículo você deseja inserir:\n" +
+                "[1] -> Carro\n" +
+                "[2] -> Van\n" +
+                "[3] -> Furgão\n" +
+                "[4] -> Caminhão");
+        int escolhaVeiculo = teclado.nextInt();
+        switch (escolhaVeiculo) {
+            case 1:
+
         }
     }
 
