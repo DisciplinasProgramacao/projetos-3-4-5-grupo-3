@@ -1,7 +1,4 @@
 import org.junit.jupiter.api.Test;
-
-import java.util.Date;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -22,14 +19,14 @@ public class CarroTest {
 
     @Test
     public void adicionaRotaCorreta() {
-        assertTrue(carro.addRota(new Rota(new Date(), 250)));
-        assertFalse(carro.addRota(new Rota(new Date(), 500)));
+        assertTrue(carro.addRota(new Rota("04/11/2011", 250)));
+        assertFalse(carro.addRota(new Rota("04/11/2011", 500)));
     }
 
     @Test
     public void calculaCustosCerto() {
         for (int i = 0; i < 40; i++) {
-            carro.addRota(new Rota(new Date(), 250));
+            carro.addRota(new Rota("04/11/2011", 250));
         }
         assertEquals(80, carro.getOutrosCustos());
     }

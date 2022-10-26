@@ -18,7 +18,7 @@ public abstract class Veiculo {
         this.valor = valorVeiculo;
         listaRotas = new ArrayList<>();
         this.quilometragremMediaPorLitro = kmMedia;
-        this.autonomia = quilometragremMediaPorLitro * capacidadeTanque;
+        this.autonomia = quilometragremMediaPorLitro * this.capacidadeTanque;
         this.taxaIPVA = taxaIPVA;
         this.taxaSeguro = taxaSeguro;
     }
@@ -82,13 +82,13 @@ public abstract class Veiculo {
      * Método que adiciona uma Rota ao Veículo
      *
      * @param rota A rota a ser adicionada ao Veiculo
-     * @return TRUE se a KM total com a adição da rota for menor que a autonomia diária, False se com a adição da rota, a KM total for maior que a autonomia do Veiculo
+     * @return TRUE se a KM total com a adição da rota for menor que a autonomia diária, False se com a adição da rota, a KM total for maior que a autonomia do Veículo
      */
     public boolean addRota(Rota rota) {
-        if (autonomia < (getDistanciaTotal() + rota.getDistancia()))
-            return false;
-
-        return listaRotas.add(rota);
+        if (autonomia >= (rota.getDistancia())) {
+            listaRotas.add(rota);
+            return true;
+        } else return false;
     }
 
     /**
