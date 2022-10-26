@@ -7,8 +7,13 @@ import java.io.FileWriter;
 
 
 public class Arquivo {
+    /**
+     * Método que lê o dado de um arquivo .txt
+     * @param Caminho O local onde o arquivo se encontra
+     * @return Todos os dados do arquivo
+     */
     public static String Read(String Caminho) {
-        String conteudo = "";
+        StringBuilder conteudo = new StringBuilder();
         try {
             FileReader arq = new FileReader(Caminho);
             BufferedReader lerArq = new BufferedReader(arq);
@@ -16,25 +21,31 @@ public class Arquivo {
             try {
                 linha = lerArq.readLine();
                 while (linha != null) {
-                    conteudo += linha+"\r\n";
+                    conteudo.append(linha).append("\r\n");
                     linha = lerArq.readLine();
                 }
                 arq.close();
             }
             catch (IOException ex) {
-                conteudo = "Erro -> Impossível ler arquivo.";
+                conteudo = new StringBuilder("Erro -> Impossível ler arquivo.");
             }
 
         } catch (FileNotFoundException ex) {
-            conteudo = "Erro -> Arquivo não encontrado.";
+            conteudo = new StringBuilder("Erro -> Arquivo não encontrado.");
         }
-        if (conteudo.contains("Erro")) {
+        if (conteudo.toString().contains("Erro")) {
             return "";
         } else {
-            return conteudo;
+            return conteudo.toString();
         }
     }
 
+    /**
+     * Método que escreve uma String no arquivo
+     * @param arquivo O arquivo a ser utilizado
+     * @param txt O texto que será escrito
+     * @return True se não ocorrer nenhum erro durante a escrita, False se não for possivel
+     */
     public static boolean Write (String arquivo, String txt) {
         try {
             FileWriter arq = new FileWriter(arquivo);

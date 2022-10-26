@@ -12,11 +12,7 @@ public class Van extends Veiculo {
 
     @Override
     protected double getOutrosCustos() {
-        return VALOR_ALINHAMENTO * retornaAcadaXMilQuilometros(KM_NECESSARIO_VISTORIA) + VALOR_VISTORIA * retornaAcadaXMilQuilometros(KM_NECESSARIO_VISTORIA);
+        return VALOR_ALINHAMENTO * quantidadeServicoKMTotal(KM_NECESSARIO_VISTORIA) + VALOR_VISTORIA * quantidadeServicoKMTotal(KM_NECESSARIO_VISTORIA);
     }
 
-    @Override
-    public double getPrecoSeguro() {
-        return taxaSeguro * valor;
-    }
 }

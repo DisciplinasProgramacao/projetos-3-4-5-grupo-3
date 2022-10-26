@@ -1,73 +1,107 @@
 import java.util.ArrayList;
 
 public abstract class Veiculo {
-    
-    protected int id;
+    //#region Atributos
+
     protected double valor;
     protected double capacidadeTanque;
     protected final double quilometragremMediaPorLitro;
+    protected final double autonomia;
     protected ArrayList<Rota> listaRotas;
-    protected double kmPercorridos;
     protected final double taxaIPVA;
     protected final double taxaSeguro;
 
+    //#endregion
+    //#region Construtor
     public Veiculo(double valorVeiculo, double kmMedia, double capacidadeTanque, double taxaIPVA, double taxaSeguro) {
         this.capacidadeTanque = capacidadeTanque;
         this.valor = valorVeiculo;
         listaRotas = new ArrayList<>();
         this.quilometragremMediaPorLitro = kmMedia;
+        this.autonomia = quilometragremMediaPorLitro * capacidadeTanque;
         this.taxaIPVA = taxaIPVA;
         this.taxaSeguro = taxaSeguro;
     }
+    //#endregion
+    //#region Métodos
+    //#region Metodos Protegidos
 
-    public boolean addRota(Rota rota){
-        if(getAutonomiaDIaria() < rota.getDistancia())
+    /**
+     * Método que calcula o valor dos "Outros Custos" de acordo com os atributos do Veiculo
+     *
+     * @return Um double referente ao custo calculado
+     */
+    protected abstract double getOutrosCustos();
+
+    /**
+     * Método que calcula o IPVA do Veiculo de acordo com sua Categoria
+     *
+     * @return Um double referente ao valor calculado do IPVA
+     */
+    protected double getIpva() {
+        return taxaIPVA * valor;
+    }
+
+    /**
+     * Método que calcula o seguro do Veiculo de acordo com sua Categoria
+     *
+     * @return Um double referente ao valor calculado do Seguro
+     */
+    protected double calcularSeguro() {
+        return taxaSeguro * valor;
+    }
+
+    /**
+     * Método que soma as distâncias de todas as rotas, e retorna a distância total
+     *
+     * @return Um double referente a Quilometragem total percorrida pelo veículo.
+     */
+    protected double getDistanciaTotal() {
+        double distanciaTotal = 0;
+
+        for (Rota rota : this.listaRotas) {
+            distanciaTotal += rota.getDistancia();
+        }
+        return distanciaTotal;
+    }
+
+    /**
+     * Método utilizado como ferramenta para facilitar o cálculo da Quantidade de serviços serão prestados diante de uma quilometragem total.
+     *
+     * @param quantidadeKm Quantidade de KM necessária para fazer um serviço
+     * @return Um inteiro referente a quantidade de serviços que serão prestados
+     */
+    protected int quantidadeServicoKMTotal(double quantidadeKm) {
+        return (int) (getDistanciaTotal() / quantidadeKm);
+    }
+
+    //endregion
+    //#region Metodos Públicos
+
+    /**
+     * Método que adiciona uma Rota ao Veículo
+     *
+     * @param rota A rota a ser adicionada ao Veiculo
+     * @return TRUE se a KM total com a adição da rota for menor que a autonomia diária, False se com a adição da rota, a KM total for maior que a autonomia do Veiculo
+     */
+    public boolean addRota(Rota rota) {
+        if (autonomia < (getDistanciaTotal() + rota.getDistancia()))
             return false;
 
         return listaRotas.add(rota);
     }
 
-    protected double getIpva() {
-        return taxaIPVA * valor;
-    }
+    /**
+     * Método que calcula a Quilometragem máxima que o veículo percorre com seu tanque.
+     *
+     * @return Um double referente a Quantidade de Quilometros
+     */
 
-    protected double calcularSeguro(){
-        return taxaSeguro * valor;
-    }
-
-    protected abstract double getOutrosCustos();
-
-    protected double getDistanciaTotal() {
-        
-        double distanciaTotal = 0;
-        
-        for (Rota rota : this.listaRotas) {
-            distanciaTotal += rota.getDistancia();
-        }
-
-        return distanciaTotal;
-    }
-
-    public abstract double getPrecoSeguro();
-
-    public double getAutonomiaDIaria() {
-        return capacidadeTanque * quilometragremMediaPorLitro;
-    }
-
-    public double getKmcorridos(){
-        double kmPercorridos = 0;
-        for (Rota rota : listaRotas) {
-            kmPercorridos += rota.getDistancia();
-        }
-        return kmPercorridos;
-    }
-    protected int retornaAcadaXMilQuilometros(double quantidadeKm) {
-        return (int) (getKmcorridos() /quantidadeKm);
-    }
 
     @Override
     public String toString() {
-        return this.getClass() + "Tanque: " + capacidadeTanque + " IPVA: " + getIpva() + " Seguro: " + getPrecoSeguro() + " Outros Custos: " + getOutrosCustos();
+        return this.getClass() + "Tanque: " + capacidadeTanque + " IPVA: " + getIpva() + " Seguro: " + calcularSeguro() + " Outros Custos: " + getOutrosCustos();
     }
-
+    //endregion
+    //endregion
 }

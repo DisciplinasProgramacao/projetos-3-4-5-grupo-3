@@ -6,9 +6,8 @@ public class Caminhao extends Veiculo {
     private static final double TAXA_IPVA = 0.01;
     private static final double TAXA_SEGURO = 0.02;
     private static final double KM_NECESSARIO_MANUTENCAO= 20000;
-
     private static final double KM_NECESSARIO_VISTORIA= 30000;
-    private static final double TAXA_ADICIONAL_SEGURO = 2000;
+    private static final double TAXA_EXTRA_SEGURO=2000;
 
     public Caminhao(double valorVeiculo, double quilometragremMedia) {
         super(valorVeiculo, quilometragremMedia, CAPACIDADE_TANQUE, TAXA_IPVA, TAXA_SEGURO);
@@ -16,11 +15,11 @@ public class Caminhao extends Veiculo {
     
     @Override
     protected double getOutrosCustos() {
-        return VALOR_MANUTENCAO * retornaAcadaXMilQuilometros(KM_NECESSARIO_MANUTENCAO) + VALOR_VISTORIA * retornaAcadaXMilQuilometros(KM_NECESSARIO_VISTORIA);
+        return VALOR_MANUTENCAO * quantidadeServicoKMTotal(KM_NECESSARIO_MANUTENCAO) + VALOR_VISTORIA * quantidadeServicoKMTotal(KM_NECESSARIO_VISTORIA);
     }
 
     @Override
-    public double getPrecoSeguro() {
-        return taxaSeguro * valor + TAXA_ADICIONAL_SEGURO;
+    public double calcularSeguro() {
+        return taxaSeguro * valor + TAXA_EXTRA_SEGURO;
     }
 }

@@ -3,7 +3,7 @@ import java.util.Date;
 public class Rota {
     
     private Date data;
-    private double distancia;
+    private final double distancia;
 
     Rota(Date data, double distancia) {
         this.data = data;
