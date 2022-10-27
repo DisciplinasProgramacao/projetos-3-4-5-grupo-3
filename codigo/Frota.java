@@ -1,12 +1,13 @@
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 
 public class Frota {
-    private final ArrayList<Veiculo> listaVeiculos;
-    //private final ArquivoTextoLeitura arquivo;
-    private final Arquivo arquivo;
-    String arquivoLista;
+    private ArrayList<Veiculo> listaVeiculos;
     private static final int INDEX_TIPO_VEICULO = 0;
     private static final int INDEX_PRECO = 2;
     private static final int INDEX_KM_MEDIA = 3;
@@ -14,24 +15,31 @@ public class Frota {
 
     public Frota() throws IOException {
         listaVeiculos = new ArrayList<>();
-        //arquivo = new ArquivoTextoLeitura(caminhoArquivo);
-        this.arquivo = new Arquivo();
     }
 
-    public void carregarDoArquivo(String caminhoArquivo) throws IOException {
-        this.arquivoLista = caminhoArquivo;
-        for (int i = 0; i < arquivoLista.length(); i++) {
-            String txt = Arquivo.Read(arquivoLista);
-            if(txt.isEmpty()) {
-                System.out.println("Arquivo vazio");
-            } else System.out.println(txt);
-        }
-
+    /**
+     *Salva um arquivo que representa um vetor de veiculos
+     * 
+     * @param nomeArquivo  nome do arquivo a ser salvo
+     */
+    public void salvar(String nomeArquivo) throws IOException {
+        FileOutputStream fOut = new FileOutputStream(nomeArquivo);
+        ObjectOutputStream oOut = new ObjectOutputStream(fOut);
+        oOut.writeObject(this);
+        oOut.close();
     }
 
-    public void salvarVeiculoArquivo(String dadosVeiculo) throws IOException {
-        String[] vetorDados = converteEmVetor(dadosVeiculo);
-        Arquivo.Write(arquivoLista,vetorDados[INDEX_TIPO_VEICULO] + ";" + vetorDados[INDEX_PRECO] + ";" + vetorDados[INDEX_TIPO_VEICULO]);
+    /**
+     * Lê um arquivo que representa uma frota de veiculos
+     * 
+     * @param nomeArquivo  nome do arquivo a ser lido
+     */
+    public void carregar(String nomeArquivo) throws IOException, ClassNotFoundException{
+        FileInputStream fOut= new FileInputStream(nomeArquivo);
+        ObjectInputStream oOut= new ObjectInputStream(fOut);
+        Frota frota = (Frota) oOut.readObject();
+        this.listaVeiculos = frota.listaVeiculos;
+        oOut.close();
     }
 
     /**

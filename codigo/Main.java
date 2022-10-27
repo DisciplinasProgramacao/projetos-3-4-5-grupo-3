@@ -7,17 +7,17 @@ public class Main {
 
     private static  Frota frota;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
 
        frota = new Frota();
        printaMenu();
     }
 
-    private static void menuEscolha(int escolha) throws IOException {
+    private static void menuEscolha(int escolha) throws IOException, ClassNotFoundException {
 
         switch (escolha) {
-            case 1 -> frota.carregarDoArquivo("codigo/listaVeiculos.txt");
-            case 2 -> salvarVeiculo();
+            case 1 -> carregarVeiculo();
+            case 2 -> salvarVeiculos();
             case 3 -> incluirVeiculo();
             case 4 -> incluirRotaVeiculo();
             case 5 -> localizarVeiculo();
@@ -28,7 +28,14 @@ public class Main {
     }
 
 
-    private static void  printaMenu() throws IOException {
+    private static void carregarVeiculo() throws ClassNotFoundException, IOException {
+        Scanner teclado = new Scanner(System.in);
+        System.out.print("Digite o nome do arquivo de onde será carregada a frota: ");
+        String nomeDoAquivo = teclado.nextLine();
+        frota.carregar(nomeDoAquivo);
+    }
+
+    private static void  printaMenu() throws IOException, ClassNotFoundException {
         Scanner teclado = new Scanner(System.in);
         int escolha = 61;
         while (escolha != 0) {
@@ -43,20 +50,22 @@ public class Main {
             escolha = teclado.nextInt();
             menuEscolha(escolha);
         }
-
     }
 
-    private static void salvarVeiculo() throws IOException {
-        System.out.println("Insira os dados no formato Tipo;Placa;PRECO;KM MEDIA");
+    private static void salvarVeiculos() throws IOException {
         Scanner teclado = new Scanner(System.in);
-        String dadosCarro = teclado.nextLine();
-        frota.salvarVeiculoArquivo(dadosCarro);
+        System.out.print("Digite o nome do arquivo onde a frota será salva: ");
+        String nomeDoAquivo = teclado.nextLine();
+        frota.salvar(nomeDoAquivo);
+        teclado.close();
     }
 
     private static void incluirVeiculo() {
+        System.out.println("Insira os dados no formato Tipo;Placa;PRECO;KM MEDIA");
         Scanner teclado = new Scanner(System.in);
         String dadosCarroInserir = teclado.nextLine();
         frota.insereNaFrota(dadosCarroInserir);
+        teclado.close();
     }
 
     private static void incluirRotaVeiculo() {
@@ -87,7 +96,8 @@ public class Main {
     private static String perguntaPlaca() {
         Scanner teclado = new Scanner(System.in);
         System.out.println("Digite a placa do veiculo");
-        return teclado.nextLine();
+        String placa = teclado.next();
+        return placa;
     }
 
 //    public static void inserirVeiculo() {
