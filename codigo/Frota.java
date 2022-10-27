@@ -4,28 +4,34 @@ import java.util.ArrayList;
 
 public class Frota {
     private final ArrayList<Veiculo> listaVeiculos;
-    private final ArquivoTextoLeitura arquivo;
+    //private final ArquivoTextoLeitura arquivo;
+    private final Arquivo arquivo;
+    String arquivoLista;
     private static final int INDEX_TIPO_VEICULO = 0;
     private static final int INDEX_PRECO = 2;
     private static final int INDEX_KM_MEDIA = 3;
     private static final int INDEX_PLACA = 1;
 
-    public Frota(String caminhoArquivo) throws IOException {
+    public Frota() throws IOException {
         listaVeiculos = new ArrayList<>();
-        this.arquivo = new ArquivoTextoLeitura(caminhoArquivo);
+        //arquivo = new ArquivoTextoLeitura(caminhoArquivo);
+        this.arquivo = new Arquivo();
     }
 
-    public void carregarDoArquivo() throws IOException {
-        String linha = arquivo.ler();
-        while (linha != null) {
-            linha = arquivo.ler();
-            insereNaFrota(linha);
+    public void carregarDoArquivo(String caminhoArquivo) throws IOException {
+        this.arquivoLista = caminhoArquivo;
+        for (int i = 0; i < arquivoLista.length(); i++) {
+            String txt = Arquivo.Read(arquivoLista);
+            if(txt.isEmpty()) {
+                System.out.println("Arquivo vazio");
+            } else System.out.println(txt);
         }
+
     }
 
     public void salvarVeiculoArquivo(String dadosVeiculo) throws IOException {
         String[] vetorDados = converteEmVetor(dadosVeiculo);
-        arquivo.escrever(vetorDados[INDEX_TIPO_VEICULO] + ";" + vetorDados[INDEX_PRECO] + ";" + vetorDados[INDEX_TIPO_VEICULO]);
+        Arquivo.Write(arquivoLista,vetorDados[INDEX_TIPO_VEICULO] + ";" + vetorDados[INDEX_PRECO] + ";" + vetorDados[INDEX_TIPO_VEICULO]);
     }
 
     /**
@@ -74,7 +80,7 @@ public class Frota {
             case "Carro" -> "Carro";
             case "Furgao" -> "Furgao";
             case "Van" -> "Van";
-            case "Caminhao" -> "Caminhao";
+            default -> "Caminhao";
         };
     }
 
@@ -89,5 +95,16 @@ public class Frota {
             conteudo.append(veiculo.toString());
         }
         return conteudo.toString();
+    }
+
+    public Veiculo procurar(String placaProcurar) {
+
+        for (Veiculo veiculo : listaVeiculos) {
+            if (placaProcurar.equals(veiculo.placa)) {
+                return veiculo;
+            }
+        }
+
+        return null;
     }
 }

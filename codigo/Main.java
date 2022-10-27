@@ -1,11 +1,37 @@
+import java.io.IOException;
 import java.util.Scanner;
-import java.util.Date;
+
 
 public class Main {
-    public static void main(String[] args) {
-        int escolha = 1;
-        while (escolha!=0) {
-            Scanner teclado = new Scanner(System.in);
+
+
+    private static  Frota frota;
+
+    public static void main(String[] args) throws IOException {
+
+       frota = new Frota();
+       printaMenu();
+    }
+
+    private static void menuEscolha(int escolha) throws IOException {
+
+        switch (escolha) {
+            case 1 -> frota.carregarDoArquivo("codigo/listaVeiculos.txt");
+            case 2 -> salvarVeiculo();
+            case 3 -> incluirVeiculo();
+            case 4 -> incluirRotaVeiculo();
+            case 5 -> localizarVeiculo();
+            case 6 -> imprimeRelatorio();
+            case 0 -> System.out.println("Obrigado Por Utilizar :)");
+            default -> System.out.println("Opcao Invalida");
+        }
+    }
+
+
+    private static void  printaMenu() throws IOException {
+        Scanner teclado = new Scanner(System.in);
+        int escolha = 61;
+        while (escolha != 0) {
             System.out.println("------MENU------\nEscolha uma opção: ");
             System.out.println("[1] -> Carregar um conjunto de veículos de um arquivo ");
             System.out.println("[2] -> Salvar um conjunto de veículos de um arquivo");
@@ -15,94 +41,114 @@ public class Main {
             System.out.println("[6] -> Imprimir um relatório do veículo com seus gastos até o momento");
             System.out.println("[0] -> Sair do Menu");
             escolha = teclado.nextInt();
-            switch (escolha) {
-                case 1:
-                    carregarArquivo();
-                    break;
-
-                case 2:
-                    System.out.println("oi");
-                    break;
-                case 3:
-                    inserirVeiculo();
-                    break;
-
-
-            }
+            menuEscolha(escolha);
         }
+
     }
 
-    public static void carregarArquivo() {
-        String arquivo = "/Users/Matheus/Desktop/PUC 2022.2/LaboratorioModular/Veiculos.txt";
-        String txt = Arquivo.Read(arquivo);
-        if (txt.isEmpty()) {
-            System.out.println("Não existe nenhum veículo cadastrado");
-        } else {
-            System.out.println(txt);
-        }
-    }
-
-    public static void inserirVeiculo() {
+    private static void salvarVeiculo() throws IOException {
+        System.out.println("Insira os dados no formato Tipo;Placa;PRECO;KM MEDIA");
         Scanner teclado = new Scanner(System.in);
-        int escolhaVeiculo = 1;
-        while (escolhaVeiculo > 0 && escolhaVeiculo <= 4) {
-            System.out.println("Escolha qual tipo de veículo você deseja inserir:\n" +
-                    "[1] -> Carro\n" +
-                    "[2] -> Van\n" +
-                    "[3] -> Furgão\n" +
-                    "[4] -> Caminhão\n"+
-                    "[0] -> Sair do menu");
-            escolhaVeiculo = teclado.nextInt();
-            switch (escolhaVeiculo) {
-                case 1:
-                    System.out.println("Informe o valor da venda: ");
-                    double valorVendaCarro = teclado.nextDouble();
-                    System.out.println("Informe a quilometragem média: ");
-                    double quilometragemMediaCarro = teclado.nextDouble();
-                    Veiculo novoCarro = new Carro(valorVendaCarro, quilometragemMediaCarro);
-                    System.out.println("Valor da venda -> " + valorVendaCarro + "Quilometragem Média -> " + quilometragemMediaCarro
-                            + "Capacidade do tanque -> " + Carro.getCapacidadeTanque());
-                    break;
-                case 2:
-                    System.out.println("Informe o valor da venda: ");
-                    double valorVendaVan = teclado.nextDouble();
-                    System.out.println("Informe a quilometragem média: ");
-                    double quilometragemMediaVan = teclado.nextDouble();
-                    Veiculo novoVan = new Van(valorVendaVan, quilometragemMediaVan);
-                    System.out.println("Valor da venda -> " + valorVendaVan + "Quilometragem Média -> " + quilometragemMediaVan
-                            + "Capacidade do tanque -> " + Van.getCapacidadeTanque());
-                    break;
-                case 3:
-                    System.out.println("Informe o valor da venda: ");
-                    double valorVendaFurgao = teclado.nextDouble();
-                    System.out.println("Informe a quilometragem média: ");
-                    double quilometragemMediaFurgao = teclado.nextDouble();
-                    Veiculo novoFurgao = new Furgao(valorVendaFurgao, quilometragemMediaFurgao);
-                    System.out.println("Valor da venda -> " + valorVendaFurgao + "Quilometragem Média -> " + quilometragemMediaFurgao
-                            + "Capacidade do tanque -> " + Furgao.getCapacidadeTanque());
-                    break;
-                case 4:
-                    System.out.println("Informe o valor da venda: ");
-                    double valorVendaCaminhao = teclado.nextDouble();
-                    System.out.println("Informe a quilometragem média: ");
-                    double quilometragemMediaCaminhao = teclado.nextDouble();
-                    Veiculo novoCaminhao = new Caminhao(valorVendaCaminhao, quilometragemMediaCaminhao);
-                    System.out.println("Valor da venda -> " + valorVendaCaminhao + "Quilometragem Média -> " + quilometragemMediaCaminhao
-                            + "Capacidade do tanque -> " + Caminhao.getCapacidadeTanque());
-                    break;
-
-            }
-        }
+        String dadosCarro = teclado.nextLine();
+        frota.salvarVeiculoArquivo(dadosCarro);
     }
 
-    /*public static void inserirRota(){
+    private static void incluirVeiculo() {
         Scanner teclado = new Scanner(System.in);
-        System.out.println("Forneça a data da rota: ");
-        Date data = teclado.nextLine();
-        System.out.println("Insira a distância da rota:");
+        String dadosCarroInserir = teclado.nextLine();
+        frota.insereNaFrota(dadosCarroInserir);
+    }
+
+    private static void incluirRotaVeiculo() {
+        Scanner teclado = new Scanner(System.in);
+        Veiculo veiculo = frota.procurar(perguntaPlaca());
+        System.out.println("Digite a data da rota");
+        String data = teclado.nextLine();
+        System.out.println("Digite a distância da rota");
         double distancia = teclado.nextDouble();
-        Rota novaRota = new Rota(data, distancia);
-        Veiculo.addRota(novaRota);
+        Rota rota = new Rota(data, distancia);
+        veiculo.addRota(rota);
+    }
 
-    } */
+    private static void localizarVeiculo() {
+        Veiculo veiculoProcurado = frota.procurar(perguntaPlaca());
+        if (veiculoProcurado == null)
+            System.out.println("O veiculo não existe na frota");
+        else System.out.println("O veiculo existe na rota");
+    }
+
+    private static void imprimeRelatorio() {
+        Veiculo veiculoProcurar = frota.procurar(perguntaPlaca());
+        if (veiculoProcurar == null)
+            System.out.println("O veiculo não existe na rota");
+        else System.out.println(veiculoProcurar);
+    }
+
+    private static String perguntaPlaca() {
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Digite a placa do veiculo");
+        return teclado.nextLine();
+    }
+
+//    public static void inserirVeiculo() {
+//        Scanner teclado = new Scanner(System.in);
+//        int escolhaVeiculo = 1;
+//        while (escolhaVeiculo > 0 && escolhaVeiculo <= 4) {
+//            System.out.println("Escolha qual tipo de veículo você deseja inserir:\n" +
+//                    "[1] -> Carro\n" +
+//                    "[2] -> Van\n" +
+//                    "[3] -> Furgão\n" +
+//                    "[4] -> Caminhão\n" +
+//                    "[0] -> Sair do menu");
+//            escolhaVeiculo = teclado.nextInt();
+//            switch (escolhaVeiculo) {
+//                case 1:
+//                    System.out.println("Informe o valor da venda: ");
+//                    double valorVendaCarro = teclado.nextDouble();
+//                    System.out.println("Informe a quilometragem média: ");
+//                    double quilometragemMediaCarro = teclado.nextDouble();
+//                    System.out.println("Informe a placa do carro:");
+//                    String placaCarro = teclado.nextLine();
+//                    Veiculo novoCarro = new Carro(valorVendaCarro, placaCarro, quilometragemMediaCarro);
+//                    System.out.println("Valor da venda -> " + valorVendaCarro + "Quilometragem Média -> " + quilometragemMediaCarro
+//                            + "Capacidade do tanque -> " + Carro.getCapacidadeTanque());
+//                    break;
+//                case 2:
+//                    System.out.println("Informe o valor da venda: ");
+//                    double valorVendaVan = teclado.nextDouble();
+//                    System.out.println("Informe a quilometragem média: ");
+//                    double quilometragemMediaVan = teclado.nextDouble();
+//                    System.out.println("Informe a placa da van:");
+//                    String placaVan = teclado.nextLine();
+//                    Veiculo novoVan = new Van(valorVendaVan, placaVan, quilometragemMediaVan);
+//                    System.out.println("Placa -> " + placaVan + "\nValor da venda -> " + valorVendaVan + "\nQuilometragem Média -> " + quilometragemMediaVan
+//                            + "\nCapacidade do tanque -> " + Van.getCapacidadeTanque());
+//                    break;
+//                case 3:
+//                    System.out.println("Informe o valor da venda: ");
+//                    double valorVendaFurgao = teclado.nextDouble();
+//                    System.out.println("Informe a quilometragem média: ");
+//                    double quilometragemMediaFurgao = teclado.nextDouble();
+//                    System.out.println("Informe a placa do carro:");
+//                    String placaFurgao = teclado.nextLine();
+//                    Veiculo novoFurgao = new Furgao(valorVendaFurgao, placaFurgao, quilometragemMediaFurgao);
+//                    System.out.println("Placa -> " + placaFurgao + "\nValor da venda -> " + valorVendaFurgao + "\nQuilometragem Média -> " + quilometragemMediaFurgao
+//                            + "\nCapacidade do tanque -> " + Furgao.getCapacidadeTanque());
+//                    break;
+//                case 4:
+//                    System.out.println("Informe o valor da venda: ");
+//                    double valorVendaCaminhao = teclado.nextDouble();
+//                    System.out.println("Informe a quilometragem média: ");
+//                    double quilometragemMediaCaminhao = teclado.nextDouble();
+//                    System.out.println("Informe a placa do caminhão:");
+//                    String placaCaminhao = teclado.nextLine();
+//                    Veiculo novoCaminhao = new Caminhao(valorVendaCaminhao, placaCaminhao, quilometragemMediaCaminhao);
+//                    System.out.println("Placa -> " + placaCaminhao + "\nValor da venda -> " + valorVendaCaminhao + "\nQuilometragem Média -> " + quilometragemMediaCaminhao
+//                            + "\nCapacidade do tanque -> " + Caminhao.getCapacidadeTanque());
+//                    break;
+//
+//            }
+//        }
+//    }
+
 }
