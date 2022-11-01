@@ -5,12 +5,12 @@ import java.util.Scanner;
 public class Main {
 
 
-    private static  Frota frota;
-
+    private static Frota frota;
+    public static String nomeDoAquivo = "codigo/arquivoCarro.txt";
     public static void main(String[] args) throws IOException, ClassNotFoundException {
 
-       frota = new Frota();
-       printaMenu();
+        frota = new Frota();
+        printaMenu();
     }
 
     private static void menuEscolha(int escolha) throws IOException, ClassNotFoundException {
@@ -29,13 +29,11 @@ public class Main {
 
 
     private static void carregarVeiculo() throws ClassNotFoundException, IOException {
-        Scanner teclado = new Scanner(System.in);
-        System.out.print("Digite o nome do arquivo de onde será carregada a frota: ");
-        String nomeDoAquivo = teclado.nextLine();
+        String nomeDoAquivo = "codigo/arquivoCarro.txt";
         frota.carregar(nomeDoAquivo);
     }
 
-    private static void  printaMenu() throws IOException, ClassNotFoundException {
+    private static void printaMenu() throws IOException, ClassNotFoundException {
         Scanner teclado = new Scanner(System.in);
         int escolha = 61;
         while (escolha != 0) {
@@ -54,8 +52,6 @@ public class Main {
 
     private static void salvarVeiculos() throws IOException {
         Scanner teclado = new Scanner(System.in);
-        System.out.print("Digite o nome do arquivo onde a frota será salva: ");
-        String nomeDoAquivo = teclado.nextLine();
         frota.salvar(nomeDoAquivo);
         teclado.close();
     }
@@ -96,8 +92,7 @@ public class Main {
     private static String perguntaPlaca() {
         Scanner teclado = new Scanner(System.in);
         System.out.println("Digite a placa do veiculo");
-        String placa = teclado.next();
-        return placa;
+        return teclado.next();
     }
 
 //    public static void inserirVeiculo() {

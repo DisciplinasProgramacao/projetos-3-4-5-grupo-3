@@ -103,7 +103,7 @@ public abstract class Veiculo {
 
     @Override
     public String toString() {
-        return this.getClass() + "Tanque: " + capacidadeTanque + " IPVA: " + getIpva() + " Seguro: " + calcularSeguro() + " Outros Custos: " + getOutrosCustos();
+        return tipo + " Tanque: " + capacidadeTanque + " IPVA: " + getIpva() + " Seguro: " + calcularSeguro() + " Outros Custos: " + getOutrosCustos();
     }
 
     //endregion

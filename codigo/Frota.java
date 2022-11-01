@@ -1,9 +1,6 @@
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 
 public class Frota {
@@ -18,28 +15,41 @@ public class Frota {
     }
 
     /**
-     *Salva um arquivo que representa um vetor de veiculos
-     * 
-     * @param nomeArquivo  nome do arquivo a ser salvo
+     * Salva um arquivo que representa um vetor de veiculos
+     *
+     * @param nomeArquivo nome do arquivo a ser salvo
      */
     public void salvar(String nomeArquivo) throws IOException {
-        FileOutputStream fOut = new FileOutputStream(nomeArquivo);
-        ObjectOutputStream oOut = new ObjectOutputStream(fOut);
-        oOut.writeObject(this);
-        oOut.close();
+        BufferedWriter buffWrite = new BufferedWriter(new FileWriter(nomeArquivo));
+        String linha = "";
+        Scanner in = new Scanner(System.in);
+        System.out.println("Escreva algo: ");
+        linha = in.nextLine();
+        buffWrite.append(linha).append("\n");
+        buffWrite.close();
     }
 
     /**
      * Lê um arquivo que representa uma frota de veiculos
-     * 
-     * @param nomeArquivo  nome do arquivo a ser lido
+     *
+     * @param nomeArquivo nome do arquivo a ser lido
      */
-    public void carregar(String nomeArquivo) throws IOException, ClassNotFoundException{
-        FileInputStream fOut= new FileInputStream(nomeArquivo);
-        ObjectInputStream oOut= new ObjectInputStream(fOut);
-        Frota frota = (Frota) oOut.readObject();
-        this.listaVeiculos = frota.listaVeiculos;
-        oOut.close();
+    public void carregar(String nomeArquivo) throws IOException, ClassNotFoundException {
+        BufferedReader buffRead = new BufferedReader(new FileReader(nomeArquivo));
+        String linha = "";
+        while (true) {
+            if (linha != null) {
+
+                System.out.println(linha);
+            } else {
+                break;
+            }
+            linha = buffRead.readLine();
+            if (linha != null)
+                insereNaFrota(linha);
+        }
+        buffRead.close();
+
     }
 
     /**
@@ -101,6 +111,7 @@ public class Frota {
         StringBuilder conteudo = new StringBuilder();
         for (Veiculo veiculo : listaVeiculos) {
             conteudo.append(veiculo.toString());
+            conteudo.append("\n");
         }
         return conteudo.toString();
     }
