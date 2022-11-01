@@ -4,13 +4,13 @@ import java.util.Scanner;
 
 
 public class Frota {
-    private ArrayList<Veiculo> listaVeiculos;
+    private final ArrayList<Veiculo> listaVeiculos;
     private static final int INDEX_TIPO_VEICULO = 0;
     private static final int INDEX_PRECO = 2;
     private static final int INDEX_KM_MEDIA = 3;
     private static final int INDEX_PLACA = 1;
 
-    public Frota() throws IOException {
+    public Frota() {
         listaVeiculos = new ArrayList<>();
     }
 
@@ -20,13 +20,13 @@ public class Frota {
      * @param nomeArquivo nome do arquivo a ser salvo
      */
     public void salvar(String nomeArquivo) throws IOException {
-        BufferedWriter buffWrite = new BufferedWriter(new FileWriter(nomeArquivo));
-        String linha = "";
+        BufferedWriter arquivoEscrita = new BufferedWriter(new FileWriter(nomeArquivo, true));
+        String linha;
         Scanner in = new Scanner(System.in);
-        System.out.println("Escreva algo: ");
+        System.out.println("Escreva algo no formato: | Tipo;Placa;preco;kmMédia |");
         linha = in.nextLine();
-        buffWrite.append(linha).append("\n");
-        buffWrite.close();
+        arquivoEscrita.append("\n").append(linha);
+        arquivoEscrita.close();
     }
 
     /**
@@ -34,22 +34,20 @@ public class Frota {
      *
      * @param nomeArquivo nome do arquivo a ser lido
      */
-    public void carregar(String nomeArquivo) throws IOException, ClassNotFoundException {
+    public void carregar(String nomeArquivo) throws IOException {
         BufferedReader buffRead = new BufferedReader(new FileReader(nomeArquivo));
-        String linha = "";
+        String linha = buffRead.readLine();
         while (true) {
             if (linha != null) {
-
                 System.out.println(linha);
             } else {
                 break;
             }
             linha = buffRead.readLine();
-            if (linha != null)
+            if (linha != null && !linha.equals(""))
                 insereNaFrota(linha);
         }
         buffRead.close();
-
     }
 
     /**
