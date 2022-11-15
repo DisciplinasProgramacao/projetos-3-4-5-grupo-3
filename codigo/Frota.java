@@ -6,9 +6,10 @@ import java.util.Scanner;
 public class Frota {
     private final ArrayList<Veiculo> listaVeiculos;
     private static final int INDEX_TIPO_VEICULO = 0;
+    private static final int INDEX_PLACA = 1;
     private static final int INDEX_PRECO = 2;
     private static final int INDEX_KM_MEDIA = 3;
-    private static final int INDEX_PLACA = 1;
+
 
     public Frota() {
         listaVeiculos = new ArrayList<>();
@@ -56,41 +57,38 @@ public class Frota {
      * @param dadosVeiculo String no formato String Tipo; double Preco; double kmMedia
      */
     public void insereNaFrota(String dadosVeiculo) {
-        String tipoVeiculo = verificaTipo(dadosVeiculo);
+        String tipoVeiculo = verificaTipoVeiculo(dadosVeiculo);
         String[] vetorDados = converteEmVetor(dadosVeiculo);
         double preco = Double.parseDouble(vetorDados[INDEX_PRECO]);
         double kmMedia = Double.parseDouble(vetorDados[INDEX_KM_MEDIA]);
         String placa = vetorDados[INDEX_PLACA];
+        insereVeiculo(tipoVeiculo, preco, placa, kmMedia);
+    }
 
-        switch (tipoVeiculo) {
-            case "Carro" -> insereCarro(preco, placa, kmMedia);
-            case "Van" -> insereVan(preco, placa, kmMedia);
-            case "Furgao" -> insereFurgao(preco, placa, kmMedia);
-            case "Caminhao" -> insereCaminhao(preco, placa, kmMedia);
+    private void insereVeiculo(String tipo, double preco, String placa, double kmMedia) {
+
+        switch (tipo) {
+            case "Caminhao" -> {
+                Caminhao caminhao = new Caminhao(preco, placa, kmMedia);
+                listaVeiculos.add(caminhao);
+            }
+            case "Carro" -> {
+                Carro carro = new Carro(preco, placa, kmMedia);
+                listaVeiculos.add(carro);
+            }
+            case "Furgao" -> {
+                Furgao furgao = new Furgao(preco, placa, kmMedia);
+                listaVeiculos.add(furgao);
+            }
+            case "Van" -> {
+                Van van = new Van(preco, placa, kmMedia);
+                listaVeiculos.add(van);
+            }
         }
     }
 
-    private void insereCaminhao(double preco, String placa, double kmMedia) {
-        Caminhao caminhao = new Caminhao(preco, placa, kmMedia);
-        listaVeiculos.add(caminhao);
-    }
 
-    private void insereFurgao(double preco, String placa, double kmMedia) {
-        Furgao furgao = new Furgao(preco, placa, kmMedia);
-        listaVeiculos.add(furgao);
-    }
-
-    private void insereVan(double preco, String placa, double kmMedia) {
-        Van van = new Van(preco, placa, kmMedia);
-        listaVeiculos.add(van);
-    }
-
-    private void insereCarro(double preco, String placa, double kmMedia) {
-        Carro carro = new Carro(preco, placa, kmMedia);
-        listaVeiculos.add(carro);
-    }
-
-    private String verificaTipo(String linha) {
+    private String verificaTipoVeiculo(String linha) {
         String[] vetorDados = converteEmVetor(linha);
         return switch (vetorDados[INDEX_TIPO_VEICULO]) {
             case "Carro" -> "Carro";
@@ -121,7 +119,9 @@ public class Frota {
                 return veiculo;
             }
         }
-
         return null;
     }
+
+
+
 }
