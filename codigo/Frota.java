@@ -129,6 +129,9 @@ public class Frota {
                 return (ArrayList<Veiculo>) this.listaVeiculos
                         .stream().sorted(Comparator.comparing(Veiculo::getNumRotas).reversed()).toList();
         }
+
+
+        return null;
     }
 
     public void kmMediaDasRotas() {
@@ -142,9 +145,6 @@ public class Frota {
         }
         double mediaRotas = totalRotas / qtdRotas;
         System.out.println("A media entre as rotas da empresa é:" + (mediaRotas));
-    }
-
-        return null;
     }
 
     public ArrayList<Veiculo> maisRotas() {
