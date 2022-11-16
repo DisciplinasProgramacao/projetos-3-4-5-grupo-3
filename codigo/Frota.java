@@ -41,6 +41,7 @@ public class Frota {
         while (true) {
             if (linha != null) {
                 System.out.println(linha);
+                insereNaFrota(linha);
             } else {
                 break;
             }
@@ -122,6 +123,18 @@ public class Frota {
         return null;
     }
 
+    public void kmMediaDasRotas() {
+        int qtdRotas = 0;
+        double totalRotas = 0;
+        for (Veiculo veiculo : listaVeiculos) {
+            for (Rota rota : veiculo.listaRotas) {
+                qtdRotas++;
+                totalRotas += rota.getDistancia();
+            }
+        }
+        double mediaRotas = totalRotas / qtdRotas;
+        System.out.println("A media entre as rotas da empresa é:" + (mediaRotas));
+    }
 
 
 }
