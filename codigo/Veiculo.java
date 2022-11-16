@@ -6,11 +6,16 @@ public abstract class Veiculo {
     protected final String placa;
     protected double valor;
     protected double capacidadeTanque;
+    protected double tanque;
     protected final double quilometragremMediaPorLitro;
     protected final double autonomia;
     protected ArrayList<Rota> listaRotas;
+    protected ArrayList<Gasto> gastos;
+
     protected final double taxaIPVA;
     protected final double taxaSeguro;
+
+    protected final Combustivel combustivel;
 
     //#endregion
     //#region Construtor
@@ -104,6 +109,29 @@ public abstract class Veiculo {
     @Override
     public String toString() {
         return tipo + " Tanque: " + capacidadeTanque + " IPVA: " + getIpva() + " Seguro: " + calcularSeguro() + " Outros Custos: " + getOutrosCustos();
+    }
+
+    public void abastecer(Integer distancia) {
+        Integer distanciaPossivel = combustivel.consumo/this.tanque;
+        if(distancia > distanciaPossivel)
+            return;
+        Double qntCombustivel = capacidadeTanque - this.tanque;
+        Gasto gasolina = new Gasto(qntCombustivel, "combustivel");
+        gastos.add(gasolina);
+        this.tanque = capacidadeTanque;
+    }
+
+    public double getGastoTotal() {
+        double GastoTotal = 0;
+        for(Gasto gasto : this.gastos) {
+            GastoTotal += gasto.getValor();
+        }
+
+        return GastoTotal;
+    }
+
+    public double getNumRotas() {
+        return this.listaRotas.size();
     }
 
     //endregion

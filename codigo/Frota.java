@@ -1,6 +1,6 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class Frota {
@@ -122,6 +122,14 @@ public class Frota {
         }
         return null;
     }
+    
+    private ArrayList<Veiculo> ordenar(String criterio) {
+        switch (criterio) {
+            case "Rotas":
+                return (ArrayList<Veiculo>) this.listaVeiculos
+                        .stream().sorted(Comparator.comparing(Veiculo::getNumRotas).reversed()).toList();
+        }
+    }
 
     public void kmMediaDasRotas() {
         int qtdRotas = 0;
@@ -136,5 +144,14 @@ public class Frota {
         System.out.println("A media entre as rotas da empresa é:" + (mediaRotas));
     }
 
+        return null;
+    }
 
+    public ArrayList<Veiculo> maisRotas() {
+        ArrayList<Veiculo> sortedListaVeiculos = ordenar("Rotas");
+        if(sortedListaVeiculos == null)
+            return null;
+
+        return (ArrayList<Veiculo>) sortedListaVeiculos.stream().limit(3).toList();
+    }
 }
