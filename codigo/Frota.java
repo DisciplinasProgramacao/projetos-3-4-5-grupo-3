@@ -3,12 +3,10 @@ import java.util.*;
 
 
 public class Frota {
-    private final ArrayList<Veiculo> listaVeiculos;
+    public final ArrayList<Veiculo> listaVeiculos;
     private static final int INDEX_TIPO_VEICULO = 0;
     private static final int INDEX_PLACA = 1;
     private static final int INDEX_PRECO = 2;
-    private static final int INDEX_KM_MEDIA = 3;
-
 
     public Frota() {
         listaVeiculos = new ArrayList<>();
@@ -60,28 +58,28 @@ public class Frota {
         String tipoVeiculo = verificaTipoVeiculo(dadosVeiculo);
         String[] vetorDados = converteEmVetor(dadosVeiculo);
         double preco = Double.parseDouble(vetorDados[INDEX_PRECO]);
-        double kmMedia = Double.parseDouble(vetorDados[INDEX_KM_MEDIA]);
+
         String placa = vetorDados[INDEX_PLACA];
-        insereVeiculo(tipoVeiculo, preco, placa, kmMedia);
+        insereVeiculo(tipoVeiculo, preco, placa);
     }
 
-    private void insereVeiculo(String tipo, double preco, String placa, double kmMedia) {
+    private void insereVeiculo(String tipo, double preco, String placa) {
 
         switch (tipo) {
             case "Caminhao" -> {
-                Caminhao caminhao = new Caminhao(preco, placa, kmMedia);
+                Caminhao caminhao = new Caminhao(preco, placa);
                 listaVeiculos.add(caminhao);
             }
             case "Carro" -> {
-                Carro carro = new Carro(preco, placa, kmMedia);
+                Carro carro = new Carro(preco, placa);
                 listaVeiculos.add(carro);
             }
             case "Furgao" -> {
-                Furgao furgao = new Furgao(preco, placa, kmMedia);
+                Furgao furgao = new Furgao(preco, placa);
                 listaVeiculos.add(furgao);
             }
             case "Van" -> {
-                Van van = new Van(preco, placa, kmMedia);
+                Van van = new Van(preco, placa);
                 listaVeiculos.add(van);
             }
         }
@@ -146,7 +144,7 @@ public class Frota {
     }
 
     public ArrayList<Veiculo> maisRotas() {
-        ArrayList<Veiculo> sortedListaVeiculos = ordenar("Rotas");
+        ArrayList<Veiculo> sortedListaVeiculos = ordenar("Rota");
         if (sortedListaVeiculos == null)
             return null;
         return (ArrayList<Veiculo>) sortedListaVeiculos.stream().limit(3).toList();
@@ -155,5 +153,14 @@ public class Frota {
     public void ordenarCustoDecrescentes() {
         Collections.sort(listaVeiculos);
         System.out.println(listaVeiculos);
+    }
+
+    public void rotasPorData(Date data) {
+        for (Veiculo veiculo : listaVeiculos) {
+            for (Rota rota : veiculo.listaRotas) {
+                if (rota.getData().equals(data))
+                    System.out.println(rota);
+            }
+        }
     }
 }

@@ -1,8 +1,11 @@
 import java.util.Date;
+import java.util.Objects;
 
 public class Rota {
+
+
     //#region Atributos
-    private Date data;
+    private final Date data;
     private final double distancia;
 
     //#endregion
@@ -18,17 +21,24 @@ public class Rota {
         return distancia;
     }
 
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
 
     @Override
     public String toString() {
-        return ("Data: " + data.getDay() + "/" + data.getMonth() + "/" + data.getYear()+" Distancia: " +distancia);
+        return ("Data: " + data.getDay() + "/" + data.getMonth() + "/" + data.getYear() + " Distancia: " + distancia);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) {
+            return false;
+        }
+        if (o.getClass() != this.getClass()) {
+            return false;
+        }
+        final Rota obj = (Rota) o;
+        return Objects.equals(this.data, obj.data);
+    }
+    public Date getData() {
+        return data;
+    }
 }

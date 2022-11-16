@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.Date;
 import java.util.Scanner;
 
 
@@ -24,9 +25,23 @@ public class Main {
             case 7 -> imprimeRelatorio();
             case 8 -> mediaTodasAsRotas();
             case 9 -> listaOrdenadaGastos();
+            case 10 -> veiculosMaisRotas();
+            case 11 -> buscaRotaPorData();
             case 0 -> System.out.println("Obrigado Por Utilizar :)");
             default -> System.out.println("Opcao Invalida");
         }
+    }
+
+    private static void buscaRotaPorData() {
+
+        System.out.println("Digite a data");
+        Scanner teclado = new Scanner(System.in);
+        Date data = new Date(teclado.nextLine());
+        frota.rotasPorData(data);
+    }
+
+    private static void veiculosMaisRotas() {
+        System.out.println(frota.maisRotas());
     }
 
     private static void adicionarGasto() {
@@ -68,6 +83,7 @@ public class Main {
             System.out.println("[7] -> Imprimir um relatório do veículo com seus gastos até o momento");
             System.out.println("[8] -> Imprimir a Quilometragem média de todas as rotas da empresa ");
             System.out.println("[9] -> Imprimir a lista de veiculos ordenadas por gasto");
+            System.out.println("[10] -> Imprimir a lista de veiculos com mais rotas");
             System.out.println("[0] -> Sair do Menu");
             escolha = teclado.nextInt();
             menuEscolha(escolha);
@@ -97,11 +113,10 @@ public class Main {
         veiculo.addRota(rota);
     }
 
-    private static Veiculo localizarVeiculo() {
+    private static void localizarVeiculo() {
         Veiculo veiculoProcurado = frota.procurar(perguntaPlaca());
         if (veiculoProcurado == null)
             System.out.println("O veiculo não existe na frota");
-        return veiculoProcurado;
     }
 
     private static void imprimeRelatorio() {

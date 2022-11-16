@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FurgaoTest {
 
-    static Furgao furgao = new Furgao(1000,"FRNG6X1", 5);
+    static Furgao furgao = new Furgao(1000,"FRNG6X1");
 
     @Test
     public void calculaIpvaCerto() {
@@ -23,13 +23,6 @@ public class FurgaoTest {
         assertFalse(furgao.addRota(new Rota("04/11/2011", 800)));
     }
 
-    @Test
-    public void calculaCustosCerto() {
-        double distanciaRota = 300;
-        for (int i = 0; i <= 34; i++) {
-            furgao.addRota(new Rota("04/11/2011", distanciaRota));
-        }
-        assertEquals(620, furgao.getOutrosCustos());
-    }
+
 }
 

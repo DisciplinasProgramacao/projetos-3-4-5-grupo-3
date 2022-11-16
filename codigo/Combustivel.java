@@ -1,41 +1,31 @@
-import java.text.BreakIterator;
-
 public enum Combustivel {
-   
-    GASOLINA,
-    ETANOL,
-    DIESEL;
+    GASOLINA("Gasolina", 12, 4.8),
+    ETANOL("Etanol", 8, 3.65),
+    DIESEL("Diesel", 3.5, 6.65);
 
-    private double consumo;
+    private final double consumo;
+    private final String nomeCombustivel;
+    private final double preco;
 
 
-    public double consMedio(Combustivel combustivel){
-           switch (combustivel){
+    /*
+     * Construtor da enum
+     */
+    Combustivel(String nomeCombustivel, double consumo, double preco) {
+        this.nomeCombustivel = nomeCombustivel;
+        this.consumo = consumo;
+        this.preco = preco;
+    }
 
-            case GASOLINA:
-            consumo = 12;
-
-            case ETANOL:
-            consumo = 8;
-            
-            case DIESEL:
-            consumo = 3.5;
-        }
+    public double getConsumo() {
         return consumo;
     }
 
-    public double precoEncherTanque(Veiculo capacidaTanqVeiculo, Combustivel combustivel){
-        switch (combustivel){
+    public String getNomeCombustivel() {
+        return nomeCombustivel;
+    }
 
-            case GASOLINA:
-            consumo = 4.8;
-
-            case ETANOL:
-            consumo = 3.65;
-            
-            case DIESEL:
-            consumo = 6.65;
-        }
-        return (capacidaTanqVeiculo * consumo);
+    public double getPreco() {
+        return preco;
     }
 }

@@ -1,14 +1,18 @@
 public class Gasto {
-    private String tipo;
-    private double valor;
+    private final String tipo;
+    private final double valor;
 
 
-    public Gasto(double valor, String tipo) {
+    public Gasto(String tipo, double valor) {
         this.tipo = tipo;
         this.valor = valor;
     }
 
     public double getValor() {
         return this.valor;
+    }
+
+    public String getTipo() {
+        return tipo;
     }
 }

@@ -5,12 +5,10 @@ public abstract class Veiculo implements Comparable<Veiculo> {
     protected final String tipo;
     protected final String placa;
     protected double valor;
-    protected double capacidadeTanque;
+    protected double capacidadeMaxTanque;
     protected double tanque;
     protected Combustivel combustivel;
-    protected final double quilometragremMediaPorLitro;
-    protected final double autonomia;
-    protected ArrayList<Rota> listaRotas;
+    public ArrayList<Rota> listaRotas;
     protected ArrayList<Gasto> gastos;
 
     protected final double taxaIPVA;
@@ -19,17 +17,17 @@ public abstract class Veiculo implements Comparable<Veiculo> {
 
     //#endregion
     //#region Construtor
-    protected Veiculo(String tipo, String placa, double valorVeiculo, double kmMedia, double capacidadeTanque, double taxaIPVA, double taxaSeguro) {
+    protected Veiculo(String tipo, String placa, double valorVeiculo, double capacidadeTanque, double taxaIPVA, double taxaSeguro, Combustivel combustivel) {
         this.tipo = tipo;
         this.placa = placa;
-        this.capacidadeTanque = capacidadeTanque;
+        this.capacidadeMaxTanque = capacidadeTanque;
+        this.tanque = capacidadeTanque;
         this.valor = valorVeiculo;
         this.gastos = new ArrayList<>();
         listaRotas = new ArrayList<>();
-        this.quilometragremMediaPorLitro = kmMedia;
-        this.autonomia = quilometragremMediaPorLitro * this.capacidadeTanque;
         this.taxaIPVA = taxaIPVA;
         this.taxaSeguro = taxaSeguro;
+        this.combustivel = combustivel;
     }
     //#endregion
     //#region Métodos
@@ -69,15 +67,6 @@ public abstract class Veiculo implements Comparable<Veiculo> {
         return distanciaTotal;
     }
 
-    /**
-     * Método utilizado como ferramenta para facilitar o cálculo da Quantidade de serviços serão prestados diante de uma quilometragem total.
-     *
-     * @param quantidadeKm Quantidade de KM necessária para fazer um serviço
-     * @return Um inteiro referente a quantidade de serviços que serão prestados
-     */
-    protected int quantidadeServicoKMTotal(double quantidadeKm) {
-        return (int) (getDistanciaTotal() / quantidadeKm);
-    }
 
     //endregion
     //#region Metodos Públicos
@@ -89,10 +78,16 @@ public abstract class Veiculo implements Comparable<Veiculo> {
      * @return TRUE se a KM total com a adição da rota for menor que a autonomia diária, False se com a adição da rota, a KM total for maior que a autonomia do Veículo
      */
     public boolean addRota(Rota rota) {
-        if (autonomia >= (rota.getDistancia())) {
+        if (getAutonomia() >= (rota.getDistancia())) {
             listaRotas.add(rota);
+            tanque -= combustivel.getPreco() * (rota.getDistancia() / combustivel.getConsumo());
             return true;
-        } else return false;
+        }
+        return false;
+    }
+
+    private double getAutonomia() {
+        return combustivel.getConsumo() * tanque;
     }
 
     /**
@@ -104,18 +99,20 @@ public abstract class Veiculo implements Comparable<Veiculo> {
 
     @Override
     public String toString() {
-        return tipo + " " + placa + " Gastos totais: " + getGastoTotal() +"\n";
+        return tipo + " " + placa + " Gastos totais: " + getGastoTotal() + "Rotas: " + listaRotas.size() + "\n";
     }
 
-    //    public void abastecer(Integer distancia) {
-//        Integer distanciaPossivel = this.tanque *;
-//        if (distancia > distanciaPossivel)
-//            return;
-//        double qntCombustivel = capacidadeTanque - this.tanque;
-//        Gasto gasolina = new Gasto(qntCombustivel, "combustivel");
-//        gastos.add(gasolina);
-//        this.tanque = capacidadeTanque;
-//    }
+    public boolean abastecer(double distanciaRota) {
+        double distanciaPossivel = this.tanque * combustivel.getConsumo();
+        if (distanciaPossivel < distanciaRota) {
+            double qntCombustivel = capacidadeMaxTanque - this.tanque;
+            Gasto gasolina = new Gasto("combustivel", qntCombustivel);
+            gastos.add(gasolina);
+            this.tanque = capacidadeMaxTanque;
+        }
+        return false;
+    }
+
     public void adicionarGasto(String tipoGasto, double valorGasto) {
         Gasto gasto = new Gasto(tipoGasto, valorGasto);
         gastos.add(gasto);
