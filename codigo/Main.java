@@ -22,9 +22,14 @@ public class Main {
             case 5 -> localizarVeiculo();
             case 6 -> imprimeRelatorio();
             case 7 -> mediaTodasAsRotas();
+            case 8 -> listaOrdenadaGastos();
             case 0 -> System.out.println("Obrigado Por Utilizar :)");
             default -> System.out.println("Opcao Invalida");
         }
+    }
+
+    private static void listaOrdenadaGastos() {
+
     }
 
     private static void mediaTodasAsRotas() {
@@ -49,6 +54,7 @@ public class Main {
             System.out.println("[5] -> Localizar um veículo da frota");
             System.out.println("[6] -> Imprimir um relatório do veículo com seus gastos até o momento");
             System.out.println("[7] -> Imprimir a Quilometragem média de todas as rotas da empresa ");
+            System.out.println("[7] -> Imprimir a lista de veiculos ordenadas por gasto");
             System.out.println("[0] -> Sair do Menu");
             escolha = teclado.nextInt();
             menuEscolha(escolha);
