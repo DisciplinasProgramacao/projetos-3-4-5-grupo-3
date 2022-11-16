@@ -1,12 +1,13 @@
 import java.util.ArrayList;
 
-public abstract class Veiculo {
+public abstract class Veiculo implements Comparable<Veiculo> {
     //#region Atributos
     protected final String tipo;
     protected final String placa;
     protected double valor;
     protected double capacidadeTanque;
     protected double tanque;
+    protected Combustivel combustivel;
     protected final double quilometragremMediaPorLitro;
     protected final double autonomia;
     protected ArrayList<Rota> listaRotas;
@@ -15,7 +16,6 @@ public abstract class Veiculo {
     protected final double taxaIPVA;
     protected final double taxaSeguro;
 
-    protected final Combustivel combustivel;
 
     //#endregion
     //#region Construtor
@@ -24,6 +24,7 @@ public abstract class Veiculo {
         this.placa = placa;
         this.capacidadeTanque = capacidadeTanque;
         this.valor = valorVeiculo;
+        this.gastos = new ArrayList<>();
         listaRotas = new ArrayList<>();
         this.quilometragremMediaPorLitro = kmMedia;
         this.autonomia = quilometragremMediaPorLitro * this.capacidadeTanque;
@@ -34,12 +35,6 @@ public abstract class Veiculo {
     //#region Métodos
     //#region Metodos Protegidos
 
-    /**
-     * Método que calcula o valor dos "Outros Custos" de acordo com os atributos do Veiculo
-     *
-     * @return Um double referente ao custo calculado
-     */
-    protected abstract double getOutrosCustos();
 
     /**
      * Método que calcula o IPVA do Veiculo de acordo com sua Categoria
@@ -64,6 +59,7 @@ public abstract class Veiculo {
      *
      * @return Um double referente a Quilometragem total percorrida pelo veículo.
      */
+
     protected double getDistanciaTotal() {
         double distanciaTotal = 0;
 
@@ -108,22 +104,26 @@ public abstract class Veiculo {
 
     @Override
     public String toString() {
-        return tipo + " Tanque: " + capacidadeTanque + " IPVA: " + getIpva() + " Seguro: " + calcularSeguro() + " Outros Custos: " + getOutrosCustos();
+        return tipo + " " + placa + " Gastos totais: " + getGastoTotal() +"\n";
     }
 
-    public void abastecer(Integer distancia) {
-        Integer distanciaPossivel = combustivel.consumo/this.tanque;
-        if(distancia > distanciaPossivel)
-            return;
-        Double qntCombustivel = capacidadeTanque - this.tanque;
-        Gasto gasolina = new Gasto(qntCombustivel, "combustivel");
-        gastos.add(gasolina);
-        this.tanque = capacidadeTanque;
+    //    public void abastecer(Integer distancia) {
+//        Integer distanciaPossivel = this.tanque *;
+//        if (distancia > distanciaPossivel)
+//            return;
+//        double qntCombustivel = capacidadeTanque - this.tanque;
+//        Gasto gasolina = new Gasto(qntCombustivel, "combustivel");
+//        gastos.add(gasolina);
+//        this.tanque = capacidadeTanque;
+//    }
+    public void adicionarGasto(String tipoGasto, double valorGasto) {
+        Gasto gasto = new Gasto(tipoGasto, valorGasto);
+        gastos.add(gasto);
     }
 
     public double getGastoTotal() {
         double GastoTotal = 0;
-        for(Gasto gasto : this.gastos) {
+        for (Gasto gasto : gastos) {
             GastoTotal += gasto.getValor();
         }
 
@@ -132,6 +132,17 @@ public abstract class Veiculo {
 
     public double getNumRotas() {
         return this.listaRotas.size();
+    }
+
+    @Override
+    public int compareTo(Veiculo veiculo) {
+        if (this.getGastoTotal() > veiculo.getGastoTotal()) {
+            return -1;
+        }
+        if (this.getGastoTotal() < veiculo.getGastoTotal()) {
+            return 1;
+        }
+        return 0;
     }
 
     //endregion

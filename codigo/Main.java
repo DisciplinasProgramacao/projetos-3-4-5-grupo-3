@@ -20,19 +20,31 @@ public class Main {
             case 3 -> incluirVeiculo();
             case 4 -> incluirRotaVeiculo();
             case 5 -> localizarVeiculo();
-            case 6 -> imprimeRelatorio();
-            case 7 -> mediaTodasAsRotas();
-            case 8 -> listaOrdenadaGastos();
+            case 6 -> adicionarGasto();
+            case 7 -> imprimeRelatorio();
+            case 8 -> mediaTodasAsRotas();
+            case 9 -> listaOrdenadaGastos();
             case 0 -> System.out.println("Obrigado Por Utilizar :)");
             default -> System.out.println("Opcao Invalida");
         }
     }
 
-    private static void listaOrdenadaGastos() {
+    private static void adicionarGasto() {
+        Veiculo veiculo = frota.procurar(perguntaPlaca());
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Digite o nome do gasto");
+        String nomeGasto = teclado.nextLine();
+        System.out.println("Digite o valor do gasto");
+        double valorGasto = teclado.nextDouble();
+        veiculo.adicionarGasto(nomeGasto, valorGasto);
+    }
 
+    private static void listaOrdenadaGastos() {
+        frota.ordenarCustoDecrescentes();
     }
 
     private static void mediaTodasAsRotas() {
+
         frota.kmMediaDasRotas();
     }
 
@@ -52,9 +64,10 @@ public class Main {
             System.out.println("[3] -> Incluir um novo veículo");
             System.out.println("[4] -> Incluir rotas para um veículo");
             System.out.println("[5] -> Localizar um veículo da frota");
-            System.out.println("[6] -> Imprimir um relatório do veículo com seus gastos até o momento");
-            System.out.println("[7] -> Imprimir a Quilometragem média de todas as rotas da empresa ");
-            System.out.println("[7] -> Imprimir a lista de veiculos ordenadas por gasto");
+            System.out.println("[6] -> Incluir gasto ao veiculo");
+            System.out.println("[7] -> Imprimir um relatório do veículo com seus gastos até o momento");
+            System.out.println("[8] -> Imprimir a Quilometragem média de todas as rotas da empresa ");
+            System.out.println("[9] -> Imprimir a lista de veiculos ordenadas por gasto");
             System.out.println("[0] -> Sair do Menu");
             escolha = teclado.nextInt();
             menuEscolha(escolha);
@@ -84,11 +97,11 @@ public class Main {
         veiculo.addRota(rota);
     }
 
-    private static void localizarVeiculo() {
+    private static Veiculo localizarVeiculo() {
         Veiculo veiculoProcurado = frota.procurar(perguntaPlaca());
         if (veiculoProcurado == null)
             System.out.println("O veiculo não existe na frota");
-        else System.out.println("O veiculo existe na rota");
+        return veiculoProcurado;
     }
 
     private static void imprimeRelatorio() {
@@ -103,5 +116,4 @@ public class Main {
         System.out.println("Digite a placa do veiculo");
         return teclado.next();
     }
-
 }

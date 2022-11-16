@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 
 public class Frota {
@@ -122,12 +121,11 @@ public class Frota {
         }
         return null;
     }
-    
+
     private ArrayList<Veiculo> ordenar(String criterio) {
-        switch (criterio) {
-            case "Rotas":
-                return (ArrayList<Veiculo>) this.listaVeiculos
-                        .stream().sorted(Comparator.comparing(Veiculo::getNumRotas).reversed()).toList();
+        if ("Rotas".equals(criterio)) {
+            return (ArrayList<Veiculo>) this.listaVeiculos
+                    .stream().sorted(Comparator.comparing(Veiculo::getNumRotas).reversed()).toList();
         }
 
 
@@ -149,9 +147,13 @@ public class Frota {
 
     public ArrayList<Veiculo> maisRotas() {
         ArrayList<Veiculo> sortedListaVeiculos = ordenar("Rotas");
-        if(sortedListaVeiculos == null)
+        if (sortedListaVeiculos == null)
             return null;
-
         return (ArrayList<Veiculo>) sortedListaVeiculos.stream().limit(3).toList();
+    }
+
+    public void ordenarCustoDecrescentes() {
+        Collections.sort(listaVeiculos);
+        System.out.println(listaVeiculos);
     }
 }
