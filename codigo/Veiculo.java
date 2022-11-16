@@ -11,6 +11,7 @@ public abstract class Veiculo {
     protected final double autonomia;
     protected ArrayList<Rota> listaRotas;
     protected ArrayList<Gasto> gastos;
+
     protected final double taxaIPVA;
     protected final double taxaSeguro;
 
@@ -118,6 +119,19 @@ public abstract class Veiculo {
         Gasto gasolina = new Gasto(qntCombustivel, "combustivel");
         gastos.add(gasolina);
         this.tanque = capacidadeTanque;
+    }
+
+    public double getGastoTotal() {
+        double GastoTotal = 0;
+        for(Gasto gasto : this.gastos) {
+            GastoTotal += gasto.getValor();
+        }
+
+        return GastoTotal;
+    }
+
+    public double getNumRotas() {
+        return this.listaRotas.size();
     }
 
     //endregion

@@ -7,4 +7,8 @@ public class Gasto {
         this.tipo = tipo;
         this.valor = valor;
     }
+
+    public double getValor() {
+        return this.valor;
+    }
 }
