@@ -41,6 +41,7 @@ public class Frota {
         while (true) {
             if (linha != null) {
                 System.out.println(linha);
+                insereNaFrota(linha);
             } else {
                 break;
             }
@@ -121,13 +122,27 @@ public class Frota {
         }
         return null;
     }
-
+    
     private ArrayList<Veiculo> ordenar(String criterio) {
         switch (criterio) {
             case "Rotas":
                 return (ArrayList<Veiculo>) this.listaVeiculos
                         .stream().sorted(Comparator.comparing(Veiculo::getNumRotas).reversed()).toList();
         }
+    }
+
+    public void kmMediaDasRotas() {
+        int qtdRotas = 0;
+        double totalRotas = 0;
+        for (Veiculo veiculo : listaVeiculos) {
+            for (Rota rota : veiculo.listaRotas) {
+                qtdRotas++;
+                totalRotas += rota.getDistancia();
+            }
+        }
+        double mediaRotas = totalRotas / qtdRotas;
+        System.out.println("A media entre as rotas da empresa é:" + (mediaRotas));
+    }
 
         return null;
     }

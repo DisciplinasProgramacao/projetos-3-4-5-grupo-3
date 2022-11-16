@@ -9,13 +9,11 @@ public class Main {
     public static String nomeDoAquivo = "codigo/arquivoCarro.txt";
 
     public static void main(String[] args) throws IOException {
-
         frota = new Frota();
         printaMenu();
     }
 
     private static void menuEscolha(int escolha) throws IOException {
-
         switch (escolha) {
             case 1 -> carregarVeiculo();
             case 2 -> salvarVeiculos();
@@ -30,7 +28,7 @@ public class Main {
     }
 
     private static void mediaTodasAsRotas() {
-
+        frota.kmMediaDasRotas();
     }
 
 
@@ -39,7 +37,7 @@ public class Main {
         frota.carregar(nomeDoAquivo);
     }
 
-    private static void printaMenu() throws IOException{
+    private static void printaMenu() throws IOException {
         Scanner teclado = new Scanner(System.in);
         int escolha = 61;
         while (escolha != 0) {
