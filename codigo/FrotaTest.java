@@ -12,7 +12,7 @@ public class FrotaTest {
     static Frota frota = new Frota();
 
     @Test
-    void procurar() {
+    void procurar() throws Exception {
         frota.insereNaFrota("Carro;FRNG6X1;1000;100000");
         frota.insereNaFrota("Caminhao;FRNG6X2;1000;100000");
         frota.insereNaFrota("Furgao;FRNG6X3;1000;100000");
@@ -22,7 +22,7 @@ public class FrotaTest {
     }
 
     @Test
-    void maisRotas() {
+    void maisRotas() throws Exception {
         frota.insereNaFrota("Carro;FRNG6X1;1000;100000");
         frota.insereNaFrota("Caminhao;FRNG6X2;1000;100000");
         frota.insereNaFrota("Furgao;FRNG6X3;1000;100000");
@@ -56,7 +56,7 @@ public class FrotaTest {
     }
 
     @Test
-    void custoDecrescente() {
+    void custoDecrescente() throws Exception {
         frota.insereNaFrota("Carro;FRNG6X1;1000;100000");
         frota.insereNaFrota("Caminhao;FRNG6X2;1000;100000");
         frota.insereNaFrota("Furgao;FRNG6X3;1000;100000");
@@ -90,7 +90,7 @@ public class FrotaTest {
     }
 
     @Test
-    void rotasPorData() throws ParseException {
+    void rotasPorData() throws Exception {
         frota.insereNaFrota("Carro;FRNG6X1;1000;100000");
         frota.insereNaFrota("Caminhao;FRNG6X2;1000;100000");
         frota.insereNaFrota("Furgao;FRNG6X3;1000;100000");
@@ -131,7 +131,7 @@ public class FrotaTest {
 
 
     @Test
-    void test() {
+    void test() throws Exception {
         frota.insereNaFrota("carro;FRNG6X1;1000;100000");
 
         frota.listaVeiculos.forEach(System.out::println);

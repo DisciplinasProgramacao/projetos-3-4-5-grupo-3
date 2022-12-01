@@ -9,12 +9,12 @@ public class Main {
     private static Frota frota;
     public static String nomeDoAquivo = "codigo/arquivoCarro.txt";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
         frota = new Frota();
         printaMenu();
     }
 
-    private static void menuEscolha(int escolha) throws IOException {
+    private static void menuEscolha(int escolha) throws Exception {
         switch (escolha) {
             case 1 -> carregarVeiculo();
             case 2 -> salvarVeiculos();
@@ -64,12 +64,12 @@ public class Main {
     }
 
 
-    private static void carregarVeiculo() throws IOException {
+    private static void carregarVeiculo() throws Exception {
         String nomeDoAquivo = "codigo/arquivoCarro.txt";
         frota.carregar(nomeDoAquivo);
     }
 
-    private static void printaMenu() throws IOException {
+    private static void printaMenu() throws Exception {
         Scanner teclado = new Scanner(System.in);
         int escolha = 61;
         while (escolha != 0) {
@@ -94,7 +94,7 @@ public class Main {
         frota.salvar(nomeDoAquivo);
     }
 
-    private static void incluirVeiculo() {
+    private static void incluirVeiculo() throws Exception {
         System.out.println("Insira os dados no formato Tipo;Placa;PRECO;KM MEDIA");
         Scanner teclado = new Scanner(System.in);
         String dadosCarroInserir = teclado.nextLine();

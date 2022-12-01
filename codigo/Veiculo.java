@@ -5,9 +5,8 @@ public abstract class Veiculo implements Comparable<Veiculo> {
     protected final String tipo;
     protected final String placa;
     protected double valor;
-    protected double capacidadeMaxTanque;
-    protected double tanque;
-    protected Combustivel combustivel;
+    protected Tanque tanque;
+
     public ArrayList<Rota> listaRotas;
     protected ArrayList<Gasto> gastos;
 
@@ -17,17 +16,24 @@ public abstract class Veiculo implements Comparable<Veiculo> {
 
     //#endregion
     //#region Construtor
-    protected Veiculo(String tipo, String placa, double valorVeiculo, double capacidadeTanque, double taxaIPVA, double taxaSeguro, Combustivel combustivel) {
+    protected Veiculo(
+            String tipo,
+            String placa,
+            double valorVeiculo,
+            double capacidadeTanque,
+            double taxaIPVA,
+            double taxaSeguro,
+            Combustivel combustivel,
+            ArrayList<String> tiposCombustivel
+    ) {
         this.tipo = tipo;
         this.placa = placa;
-        this.capacidadeMaxTanque = capacidadeTanque;
-        this.tanque = capacidadeTanque;
+        this.tanque = new Tanque(capacidadeTanque, combustivel, tiposCombustivel);
         this.valor = valorVeiculo;
         this.gastos = new ArrayList<>();
         listaRotas = new ArrayList<>();
         this.taxaIPVA = taxaIPVA;
         this.taxaSeguro = taxaSeguro;
-        this.combustivel = combustivel;
     }
     //#endregion
     //#region Métodos
@@ -80,14 +86,17 @@ public abstract class Veiculo implements Comparable<Veiculo> {
     public boolean addRota(Rota rota) {
         if (getAutonomia() >= (rota.getDistancia())) {
             listaRotas.add(rota);
-            tanque -= combustivel.getPreco() * (rota.getDistancia() / combustivel.getConsumo());
+            double valorUtilizado = rota.getDistancia() / this.tanque.getCombustivel().getConsumo();
+            this.tanque.utilizarGasolina(valorUtilizado);
+            adicionarGasto("combustivel", (this.tanque.getCombustivel().getPreco() * valorUtilizado));
             return true;
         }
+        System.out.println("Gasolina insuficiente favor abastecer o tanque");
         return false;
     }
 
     private double getAutonomia() {
-        return combustivel.getConsumo() * tanque;
+        return this.tanque.getCombustivel().getConsumo() * this.tanque.getNivelTanque();
     }
 
     /**
@@ -102,13 +111,11 @@ public abstract class Veiculo implements Comparable<Veiculo> {
         return tipo + " " + placa + " Gastos totais: " + getGastoTotal() + "Rotas: " + listaRotas.size() + "\n";
     }
 
-    public boolean abastecer(double distanciaRota) {
-        double distanciaPossivel = this.tanque * combustivel.getConsumo();
+    public boolean abastecer(double distanciaRota, String tipoCombustivel, double quantidade) throws Exception {
+        double distanciaPossivel = this.tanque.getNivelTanque() * this.tanque.getCombustivel().getConsumo();
         if (distanciaPossivel < distanciaRota) {
-            double qntCombustivel = capacidadeMaxTanque - this.tanque;
-            Gasto gasolina = new Gasto("combustivel", qntCombustivel);
-            gastos.add(gasolina);
-            this.tanque = capacidadeMaxTanque;
+            double valorAbastecer = this.tanque.encherTanque(tipoCombustivel, quantidade) * this.tanque.getCombustivel().getPreco();
+            adicionarGasto("combustivel", valorAbastecer);
         }
         return false;
     }

@@ -33,18 +33,14 @@ public class Frota {
      *
      * @param nomeArquivo nome do arquivo a ser lido
      */
-    public void carregar(String nomeArquivo) throws IOException {
+    public void carregar(String nomeArquivo) throws Exception {
         BufferedReader buffRead = new BufferedReader(new FileReader(nomeArquivo));
         String linha = buffRead.readLine();
-        while (true) {
-            if (linha != null) {
-                System.out.println(linha);
-                insereNaFrota(linha);
-            } else {
-                break;
-            }
+        while (linha != null) {
+            System.out.println(linha);
+            insereNaFrota(linha);
             linha = buffRead.readLine();
-            if (linha != null && !linha.equals(""))
+            if (!linha.equals(""))
                 insereNaFrota(linha);
         }
         buffRead.close();
@@ -55,7 +51,7 @@ public class Frota {
      *
      * @param dadosVeiculo String no formato String Tipo; double Preco; double kmMedia
      */
-    public void insereNaFrota(String dadosVeiculo) {
+    public void insereNaFrota(String dadosVeiculo) throws Exception {
         String tipoVeiculo = verificaTipoVeiculo(dadosVeiculo);
         String[] vetorDados = converteEmVetor(dadosVeiculo);
         double preco = Double.parseDouble(vetorDados[INDEX_PRECO]);
@@ -64,26 +60,8 @@ public class Frota {
         insereVeiculo(tipoVeiculo, preco, placa);
     }
 
-    private void insereVeiculo(String tipo, double preco, String placa) {
-
-        switch (tipo) {
-            case "Caminhao" -> {
-                Caminhao caminhao = new Caminhao(preco, placa);
-                listaVeiculos.add(caminhao);
-            }
-            case "Carro" -> {
-                Carro carro = new Carro(preco, placa);
-                listaVeiculos.add(carro);
-            }
-            case "Furgao" -> {
-                Furgao furgao = new Furgao(preco, placa);
-                listaVeiculos.add(furgao);
-            }
-            case "Van" -> {
-                Van van = new Van(preco, placa);
-                listaVeiculos.add(van);
-            }
-        }
+    private void insereVeiculo(String tipo, double preco, String placa) throws Exception {
+        FabricaVeiculo.criarVeiculo(tipo, preco, placa);
     }
 
 
