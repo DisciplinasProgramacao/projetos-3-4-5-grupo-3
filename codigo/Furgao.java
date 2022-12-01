@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Furgao extends Veiculo {
+    /* region #Attributes */
     private static final String TIPO = "Furgao";
     private static final double CAPACIDADE_TANQUE = 80;
     private static final double TAXA_IPVA = 0.03;
@@ -27,6 +28,7 @@ public class Furgao extends Veiculo {
     }
 
 
+    /* get */
     public static double getCapacidadeTanque() {
         return CAPACIDADE_TANQUE;
     }

@@ -1,4 +1,5 @@
 public class FabricaVeiculo {
+    /* Fábrica genérica que engloba a criação de um veiculo qualquer*/
     static Veiculo criarVeiculo(String tipo, double preco, String placa) throws Exception {
         switch (tipo) {
             case "Caminhao" -> {

@@ -10,7 +10,7 @@ public class Tanque {
 
     private double nivelTanque;
 
-    /*Construtor que tem como parametro a capacidade atual do tanque, o combustivel a ser abastecido
+    /* Construtor que tem como parametro a capacidade atual do tanque, o combustivel a ser abastecido
     e os tipos de combustiveis possíveis de abastecimento
      */
 

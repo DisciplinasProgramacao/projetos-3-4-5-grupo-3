@@ -14,6 +14,7 @@ public class Main {
         printaMenu();
     }
 
+    /* metodo para fornecer o menu */
     private static void menuEscolha(int escolha) throws Exception {
         switch (escolha) {
             case 1 -> carregarVeiculo();
@@ -32,6 +33,7 @@ public class Main {
         }
     }
 
+    /* método que procura um percurso pela data fornecida pelo usuario */
     private static void buscaRotaPorData() {
 
         System.out.println("Digite a data");
@@ -44,6 +46,7 @@ public class Main {
         System.out.println(frota.maisRotas());
     }
 
+    /* método para adicionar gasto em determinado veiculo */
     private static void adicionarGasto() {
         Veiculo veiculo = frota.procurar(perguntaPlaca());
         Scanner teclado = new Scanner(System.in);
@@ -54,16 +57,19 @@ public class Main {
         veiculo.adicionarGasto(nomeGasto, valorGasto);
     }
 
+    /* método para ordenar os gastos de forma decrescente */
     private static void listaOrdenadaGastos() {
         frota.ordenarCustoDecrescentes();
     }
 
+    /* fornece a km média de todas as rotas já feitas */
     private static void mediaTodasAsRotas() {
 
         frota.kmMediaDasRotas();
     }
 
 
+    /* lê o arquivo e carrega o mesmo */
     private static void carregarVeiculo() throws Exception {
         String nomeDoAquivo = "codigo/arquivoCarro.txt";
         frota.carregar(nomeDoAquivo);
@@ -90,6 +96,13 @@ public class Main {
         }
     }
 
+    /* métodos útilizados para manuseio dos veiculos
+        * incluir
+        * salvar
+        * incluir rota
+        * localizar veiculo
+        * imprimir relatorio
+     */
     private static void salvarVeiculos() throws IOException {
         frota.salvar(nomeDoAquivo);
     }
