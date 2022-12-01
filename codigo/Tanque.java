@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Tanque {
+    //region #Attributes
     private double capacidadeMaxTanque;
 
     private Combustivel combustivel;
@@ -8,6 +9,10 @@ public class Tanque {
     private ArrayList<Combustivel> tiposCombustivel = new ArrayList<>();
 
     private double nivelTanque;
+
+    /*Construtor que tem como parametro a capacidade atual do tanque, o combustivel a ser abastecido
+    e os tipos de combustiveis possíveis de abastecimento
+     */
 
     public Tanque(double capacidadeTanque, Combustivel combustivel, ArrayList<String> tiposCombustivel) {
         this.capacidadeMaxTanque = capacidadeTanque;
@@ -23,6 +28,7 @@ public class Tanque {
         return this.combustivel;
     }
 
+    /* método para calcular o nível atual de combustivel no tanque do veiculo */
     public void utilizarGasolina(double valorUtilizado) {
         this.nivelTanque -= valorUtilizado;
     }
@@ -58,6 +64,7 @@ public class Tanque {
 
     }
 
+    //get para nivel do tanque e capacidade máxima do tanque
     public double getNivelTanque() {
         return this.nivelTanque;
     }
