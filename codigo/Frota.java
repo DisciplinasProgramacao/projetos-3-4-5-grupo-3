@@ -4,6 +4,7 @@ import java.util.stream.Collectors;
 
 
 public class Frota {
+    //region #attributes
     public final ArrayList<Veiculo> listaVeiculos;
     private static final int INDEX_TIPO_VEICULO = 0;
     private static final int INDEX_PLACA = 1;
@@ -99,6 +100,8 @@ public class Frota {
         return null;
     }
 
+
+    //ordena a lista de veiculos disponivel
     private List<Veiculo> ordenar(String criterio) {
         List<Veiculo> listaVeiculosSortedRotas = new ArrayList<>(this.listaVeiculos);
 
@@ -113,6 +116,7 @@ public class Frota {
         return null;
     }
 
+    //método que calcula a km media de rotas
     public void kmMediaDasRotas() {
         int qtdRotas = 0;
         double totalRotas = 0;
@@ -139,11 +143,13 @@ public class Frota {
        return null;
     }
 
+    /* ordenação dos custos de veiculo em ordem decrescente */
     public void ordenarCustoDecrescentes() {
         Collections.sort(listaVeiculos);
         System.out.println(listaVeiculos);
     }
 
+    /* filtrar as rotas por data */
     public void rotasPorData(Date data) {
         for (Veiculo veiculo : listaVeiculos) {
             for (Rota rota : veiculo.listaRotas) {

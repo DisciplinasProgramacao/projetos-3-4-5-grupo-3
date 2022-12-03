@@ -1,19 +1,20 @@
 import java.util.ArrayList;
 
 public class Furgao extends Veiculo {
+    /* region #Attributes */
     private static final String TIPO = "Furgao";
     private static final double CAPACIDADE_TANQUE = 80;
     private static final double TAXA_IPVA = 0.03;
     private static final double TAXA_SEGURO = 0.03;
-    private static final ArrayList<String> TIPOS_COMBUSTIVEL = new ArrayList<>() {
+    private static final ArrayList<Combustivel> TIPOS_COMBUSTIVEL = new ArrayList<>() {
         {
-            add("Gasolina");
-            add("Diesel");
+            add(Combustivel.GASOLINA);
+            add(Combustivel.DIESEL);
         }
     };
 
 
-    public Furgao(double valorVeiculo, String placa) {
+    public Furgao(double valorVeiculo, String placa) throws Exception {
         super(
                 TIPO,
                 placa,
@@ -27,6 +28,7 @@ public class Furgao extends Veiculo {
     }
 
 
+    /* get */
     public static double getCapacidadeTanque() {
         return CAPACIDADE_TANQUE;
     }

@@ -5,7 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CarroTest {
 
-    static Carro carro = new Carro(1000,"FRNG6X1");
+    static Carro carro;
+
+    static {
+        try {
+            carro = new Carro(1000,"FRNG6X1");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Test
     public void calculaIpvaCerto() {

@@ -1,3 +1,4 @@
 public interface IFabrica {
-    public Veiculo criar(double preco, String placa);
+    /* Fábrica genérica que engloba a criação de um veiculo qualquer*/
+    public Veiculo criar(double preco, String placa) throws Exception;
 }

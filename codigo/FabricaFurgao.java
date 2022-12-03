@@ -1,6 +1,6 @@
 public class FabricaFurgao implements IFabrica {
-
-    public Veiculo criar(double preco, String placa) {
+    //implementação fábrica para cada veiculo - FURGAO
+    public Veiculo criar(double preco, String placa) throws Exception {
         return new Furgao(preco, placa);
     }
 }

@@ -6,14 +6,14 @@ public class Caminhao extends Veiculo {
     private static final double TAXA_IPVA = 0.01;
     private static final double TAXA_SEGURO = 0.02;
     private static final double TAXA_EXTRA_SEGURO = 2000;
-    private static final ArrayList<String> TIPOS_COMBUSTIVEL = new ArrayList<>() {
+    private static final ArrayList<Combustivel> TIPOS_COMBUSTIVEL = new ArrayList<>() {
         {
-            add("Diesel");
+            add(Combustivel.GASOLINA);
         }
     };
 
 
-    public Caminhao(double valorVeiculo, String placa) {
+    public Caminhao(double valorVeiculo, String placa) throws Exception {
         super(
                 TIPO,
                 placa,

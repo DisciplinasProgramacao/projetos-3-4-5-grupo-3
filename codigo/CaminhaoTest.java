@@ -5,7 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CaminhaoTest {
 
-    static Caminhao caminhao = new Caminhao(1000,"FRNG6X1");
+    static Caminhao caminhao;
+
+    static {
+        try {
+            caminhao = new Caminhao(1000,"FRNG6X1");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Test
     public void calculaIpvaCerto() {

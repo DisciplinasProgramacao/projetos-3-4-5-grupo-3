@@ -5,7 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class VanTest {
 
-    static Van van = new Van(1000,"FRNG6X1");
+    static Van van;
+
+    static {
+        try {
+            van = new Van(1000,"FRNG6X1");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Test
     public void calculaIpvaCerto() {

@@ -5,7 +5,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FurgaoTest {
 
-    static Furgao furgao = new Furgao(1000,"FRNG6X1");
+    static Furgao furgao;
+
+    static {
+        try {
+            furgao = new Furgao(1000,"FRNG6X1");
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Test
     public void calculaIpvaCerto() {
