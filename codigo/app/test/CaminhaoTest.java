@@ -31,10 +31,19 @@ public class CaminhaoTest {
     }
 
     @Test
-    public void adicionaRotaCorreta() {
+    public void adicionaRotaCorreta() throws Exception {
         Assertions.assertTrue(caminhao.addRota(new Rota(("04/11/2011"), 1250)));
-        Assertions.assertFalse(caminhao.addRota(new Rota("04/11/2011", 1500)));
+        Assertions.assertFalse(caminhao.addRota(new Rota("04/11/2011", 150000)));
     }
 
+    @Test
+    public void gastoInvalido() throws Exception {
+        try {
+            caminhao.adicionarGasto("vistoria", 1500);
+        } catch(Exception error) {
+            Assertions.assertEquals("Tipo de gasto invalido para o caminhao", error.getMessage());
+        }
+
+    }
 
 }

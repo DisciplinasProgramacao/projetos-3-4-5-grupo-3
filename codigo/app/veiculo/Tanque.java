@@ -20,6 +20,7 @@ public class Tanque {
         this.capacidadeMaxTanque = capacidadeTanque;
         this.nivelTanque = capacidadeMaxTanque;
         this.tiposCombustivel.addAll(tiposCombustivel);
+        this.combustivel = combustivel;
         this.encherTanque(combustivel, capacidadeTanque);
     }
 
@@ -32,10 +33,10 @@ public class Tanque {
         this.nivelTanque -= valorUtilizado;
     }
 
-    public double encherTanque(Combustivel tipoCombustivel, double quantidade) throws Exception {
+    public double encherTanque(Combustivel combustivel, double quantidade) throws Exception {
         double qntTotal = this.capacidadeMaxTanque - this.nivelTanque;
-        if(this.tiposCombustivel.contains(tipoCombustivel)){
-            if (this.combustivel.equals(tipoCombustivel) && this.nivelTanque != 0) {
+        if(this.tiposCombustivel.contains(combustivel)){
+            if (this.combustivel.equals(combustivel) && this.nivelTanque != 0) {
                 if (qntTotal < quantidade) {
                     this.nivelTanque += qntTotal;
                     return qntTotal;

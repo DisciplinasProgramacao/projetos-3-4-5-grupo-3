@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class Frota {
     //region #attributes
-    public final ArrayList<Veiculo> listaVeiculos;
+    private final ArrayList<Veiculo> listaVeiculos;
     private static final int INDEX_TIPO_VEICULO = 0;
     private static final int INDEX_PLACA = 1;
     private static final int INDEX_PRECO = 2;
@@ -66,17 +66,18 @@ public class Frota {
     }
 
     private void insereVeiculo(String tipo, double preco, String placa) throws Exception {
-        FabricaVeiculo.criarVeiculo(tipo, preco, placa);
+        Veiculo veiculo = FabricaVeiculo.criarVeiculo(tipo, preco, placa);
+        this.listaVeiculos.add(veiculo);
     }
 
 
     private String verificaTipoVeiculo(String linha) {
         String[] vetorDados = converteEmVetor(linha);
         return switch (vetorDados[INDEX_TIPO_VEICULO]) {
-            case "app.veiculo.Carro" -> "app.veiculo.Carro";
-            case "app.veiculo.Furgao" -> "app.veiculo.Furgao";
-            case "app.veiculo.Van" -> "app.veiculo.Van";
-            default -> "app.veiculo.Caminhao";
+            case "Carro" -> "Carro";
+            case "Furgao" -> "Furgao";
+            case "Van" -> "Van";
+            default -> "Caminhao";
         };
     }
 
@@ -95,13 +96,13 @@ public class Frota {
     }
 
     public Veiculo procurar(String placaProcurar) {
-
-        for (Veiculo veiculo : listaVeiculos) {
-            if (placaProcurar.equals(veiculo.placa)) {
-                return veiculo;
-            }
-        }
-        return null;
+        return this.listaVeiculos.stream()
+                .filter(v -> {
+                    System.out.println(v.getPlaca());
+                    return v.getPlaca().equals(placaProcurar);
+                })
+                .findFirst()
+                .get();
     }
 
 
@@ -161,5 +162,9 @@ public class Frota {
                     System.out.println(rota);
             }
         }
+    }
+
+    public ArrayList<Veiculo> getListaVeiculos() {
+        return (ArrayList<Veiculo>) listaVeiculos.clone();
     }
 }

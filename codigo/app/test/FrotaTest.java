@@ -16,28 +16,31 @@ public class FrotaTest {
 
     @Test
     void procurar() throws Exception {
-        frota.insereNaFrota("app.veiculo.Carro;FRNG6X1;1000;100000");
-        frota.insereNaFrota("app.veiculo.Caminhao;FRNG6X2;1000;100000");
-        frota.insereNaFrota("app.veiculo.Furgao;FRNG6X3;1000;100000");
-        frota.insereNaFrota("app.veiculo.Van;FRNG6X4;1000;100000");
+        if(frota.getListaVeiculos().isEmpty()) {
+            frota.insereNaFrota("Carro;FRNG6X1;1000;100000");
+            frota.insereNaFrota("Caminhao;FRNG6X2;1000;100000");
+            frota.insereNaFrota("Furgao;FRNG6X3;1000;100000");
+            frota.insereNaFrota("Van;FRNG6X4;1000;100000");
+        }
 
         Assertions.assertNotEquals(null, frota.procurar("FRNG6X1"));
     }
 
     @Test
     void maisRotas() throws Exception {
-        frota.insereNaFrota("app.veiculo.Carro;FRNG6X1;1000;100000");
-        frota.insereNaFrota("app.veiculo.Caminhao;FRNG6X2;1000;100000");
-        frota.insereNaFrota("app.veiculo.Furgao;FRNG6X3;1000;100000");
-        frota.insereNaFrota("app.veiculo.Van;FRNG6X4;1000;100000");
-
+        if(frota.getListaVeiculos().isEmpty()) {
+            frota.insereNaFrota("Carro;FRNG6X1;1000;100000");
+            frota.insereNaFrota("Caminhao;FRNG6X2;1000;100000");
+            frota.insereNaFrota("Furgao;FRNG6X3;1000;100000");
+            frota.insereNaFrota("Van;FRNG6X4;1000;100000");
+        }
         ArrayList<Veiculo> listaResposta = new ArrayList<>();
         listaResposta.add(frota.procurar("FRNG6X2"));
         listaResposta.add(frota.procurar("FRNG6X3"));
         listaResposta.add(frota.procurar("FRNG6X4"));
 
 
-        frota.listaVeiculos.forEach(veiculo -> {
+        frota.getListaVeiculos().forEach(veiculo -> {
             switch (veiculo.getTipo()) {
                 case "app.veiculo.Carro" -> veiculo.listaRotas.add(new Rota("01/01/2022", 100));
                 case "app.veiculo.Furgao" -> {
@@ -71,7 +74,7 @@ public class FrotaTest {
         listaResposta.add(frota.procurar("FRNG6X4"));
 
 
-        frota.listaVeiculos.forEach(veiculo -> {
+        frota.getListaVeiculos().forEach(veiculo -> {
             switch (veiculo.getTipo()) {
                 case "app.veiculo.Carro" -> veiculo.listaRotas.add(new Rota("01/01/2022", 100));
                 case "app.veiculo.Furgao" -> {
@@ -105,7 +108,7 @@ public class FrotaTest {
         listaResposta.add(frota.procurar("FRNG6X4"));
 
 
-        frota.listaVeiculos.forEach(veiculo -> {
+        frota.getListaVeiculos().forEach(veiculo -> {
             switch (veiculo.getTipo()) {
                 case "app.veiculo.Carro" -> veiculo.listaRotas.add(new Rota("01/01/2022", 100));
                 case "app.veiculo.Furgao" -> {
@@ -137,6 +140,6 @@ public class FrotaTest {
     void test() throws Exception {
         frota.insereNaFrota("carro;FRNG6X1;1000;100000");
 
-        frota.listaVeiculos.forEach(System.out::println);
+        frota.getListaVeiculos().forEach(System.out::println);
     }
 }

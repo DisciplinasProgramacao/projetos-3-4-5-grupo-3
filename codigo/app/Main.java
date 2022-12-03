@@ -53,7 +53,7 @@ public class Main {
     }
 
     /* método para adicionar gasto em determinado app.veiculo */
-    private static void adicionarGasto() {
+    private static void adicionarGasto() throws Exception {
         Veiculo veiculo = frota.procurar(perguntaPlaca());
         Scanner teclado = new Scanner(System.in);
         System.out.println("Digite o nome do gasto");
@@ -121,7 +121,7 @@ public class Main {
         teclado.close();
     }
 
-    private static void incluirRotaVeiculo() {
+    private static void incluirRotaVeiculo() throws Exception {
         Scanner teclado = new Scanner(System.in);
         Veiculo veiculo = frota.procurar(perguntaPlaca());
         System.out.println("Digite a data da rota");

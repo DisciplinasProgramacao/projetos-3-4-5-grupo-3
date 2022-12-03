@@ -31,7 +31,7 @@ public class VanTest {
     }
 
     @Test
-    public void adicionaRotaCorreta() {
+    public void adicionaRotaCorreta() throws Exception {
         assertTrue(van.addRota(new Rota("04/11/2011", 300)));
         assertFalse(van.addRota(new Rota("04/11/2011", 500)));
     }

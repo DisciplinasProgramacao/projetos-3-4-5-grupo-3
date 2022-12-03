@@ -41,4 +41,15 @@ public class Carro extends Veiculo {
     public static double getCapacidadeTanque() {
         return CAPACIDADE_TANQUE;
     }
+
+    @Override
+    public boolean adicionarGasto(String tipoGasto, double valorGasto) throws Exception {
+        tipoGasto = tipoGasto.toLowerCase();
+        if(tipoGasto.equals("vistoria")) {
+            throw new Exception("Tipo de gasto invalido para o carro");
+        }
+        Gasto gasto = new Gasto(tipoGasto, valorGasto);
+        gastos.add(gasto);
+        return true;
+    }
 }

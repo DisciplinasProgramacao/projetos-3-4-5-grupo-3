@@ -31,7 +31,7 @@ public class FurgaoTest {
     }
 
     @Test
-    public void adicionaRotaCorreta() {
+    public void adicionaRotaCorreta() throws Exception {
         Assertions.assertTrue(furgao.addRota(new Rota("04/11/2011", 400)));
         Assertions.assertFalse(furgao.addRota(new Rota("04/11/2011", 800)));
     }

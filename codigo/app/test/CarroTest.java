@@ -4,9 +4,10 @@ import app.veiculo.Carro;
 import app.veiculo.Rota;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.rmi.UnexpectedException;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CarroTest {
 
@@ -31,9 +32,19 @@ public class CarroTest {
     }
 
     @Test
-    public void adicionaRotaCorreta() {
+    public void adicionaRotaCorreta() throws Exception {
         Assertions.assertTrue(carro.addRota(new Rota("04/12/2011", 250)));
         Assertions.assertFalse(carro.addRota(new Rota("04/12/2011", 500)));
+    }
+
+    @Test
+    public void gastoInvalido() throws Exception {
+        try {
+            carro.adicionarGasto("vistoria", 1500);
+        } catch(Exception error) {
+            Assertions.assertEquals("Tipo de gasto invalido para o carro", error.getMessage());
+        }
+
     }
 
 }

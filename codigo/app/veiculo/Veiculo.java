@@ -85,11 +85,12 @@ public abstract class Veiculo implements Comparable<Veiculo> {
      * @param rota A rota a ser adicionada ao app.veiculo.Veiculo
      * @return TRUE se a KM total com a adição da rota for menor que a autonomia diária, False se com a adição da rota, a KM total for maior que a autonomia do Veículo
      */
-    public boolean addRota(Rota rota) {
-        if (getAutonomia() >= (rota.getDistancia())) {
+    public boolean addRota(Rota rota) throws Exception {
+        if (getAutonomia() >= rota.getDistancia()) {
             listaRotas.add(rota);
             double valorUtilizado = rota.getDistancia() / this.tanque.getCombustivel().getConsumo();
             this.tanque.utilizarGasolina(valorUtilizado);
+            System.out.println(this.tanque.getNivelTanque());
             adicionarGasto("combustivel", (this.tanque.getCombustivel().getPreco() * valorUtilizado));
             return true;
         }
@@ -113,18 +114,19 @@ public abstract class Veiculo implements Comparable<Veiculo> {
         return tipo + " " + placa + " Gastos totais: " + getGastoTotal() + "Rotas: " + listaRotas.size() + "\n";
     }
 
-    public boolean abastecer(double distanciaRota, Combustivel tipoCombustivel, double quantidade) throws Exception {
+    public boolean abastecer(double distanciaRota, Combustivel combustivel, double quantidade) throws Exception {
         double distanciaPossivel = this.tanque.getNivelTanque() * this.tanque.getCombustivel().getConsumo();
         if (distanciaPossivel < distanciaRota) {
-            double valorAbastecer = this.tanque.encherTanque(tipoCombustivel, quantidade) * this.tanque.getCombustivel().getPreco();
+            double valorAbastecer = this.tanque.encherTanque(combustivel, quantidade) * this.tanque.getCombustivel().getPreco();
             adicionarGasto("combustivel", valorAbastecer);
         }
         return false;
     }
 
-    public void adicionarGasto(String tipoGasto, double valorGasto) {
+    public boolean adicionarGasto(String tipoGasto, double valorGasto) throws Exception {
         Gasto gasto = new Gasto(tipoGasto, valorGasto);
         gastos.add(gasto);
+        return false;
     }
 
     public double getGastoTotal() {
@@ -153,6 +155,10 @@ public abstract class Veiculo implements Comparable<Veiculo> {
 
     public String getTipo() {
         return this.tipo;
+    }
+
+    public String getPlaca() {
+        return this.placa;
     }
 
     //endregion
