@@ -1,12 +1,13 @@
+package app.veiculo;
+
 import java.util.ArrayList;
 
-public class Carro extends Veiculo {
-    //#region Atributos
-    private static final String TIPO = "Carro";
-    private static final double CAPACIDADE_TANQUE = 50;
-    private static final double TAXA_IPVA = 0.04;
-    private static final double TAXA_SEGURO = 0.05;
-    private static final double TAXA_EXTRA_SEGURO = 300;
+public class Caminhao extends Veiculo {
+    private static final String TIPO = "app.veiculo.Caminhao";
+    private static final double CAPACIDADE_TANQUE = 250;
+    private static final double TAXA_IPVA = 0.01;
+    private static final double TAXA_SEGURO = 0.02;
+    private static final double TAXA_EXTRA_SEGURO = 2000;
     private static final ArrayList<Combustivel> TIPOS_COMBUSTIVEL = new ArrayList<>() {
         {
             add(Combustivel.GASOLINA);
@@ -14,7 +15,7 @@ public class Carro extends Veiculo {
     };
 
 
-    public Carro(double valorVeiculo, String placa) throws Exception {
+    public Caminhao(double valorVeiculo, String placa) throws Exception {
         super(
                 TIPO,
                 placa,
@@ -27,15 +28,12 @@ public class Carro extends Veiculo {
         );
     }
 
-    //#endregion
-    //#region Métodos
-
 
     @Override
     public double calcularSeguro() {
         return taxaSeguro * valor + TAXA_EXTRA_SEGURO;
     }
-    //#endregion
+
     public static double getCapacidadeTanque() {
         return CAPACIDADE_TANQUE;
     }

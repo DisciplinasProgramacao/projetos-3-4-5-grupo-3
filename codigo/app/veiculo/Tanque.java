@@ -1,3 +1,5 @@
+package app.veiculo;
+
 import java.util.ArrayList;
 
 public class Tanque {
@@ -25,7 +27,7 @@ public class Tanque {
         return this.combustivel;
     }
 
-    /* método para calcular o nível atual de combustivel no tanque do veiculo */
+    /* método para calcular o nível atual de combustivel no tanque do app.veiculo */
     public void utilizarGasolina(double valorUtilizado) {
         this.nivelTanque -= valorUtilizado;
     }

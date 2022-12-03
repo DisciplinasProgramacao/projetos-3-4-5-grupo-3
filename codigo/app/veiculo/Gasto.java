@@ -1,3 +1,5 @@
+package app.veiculo;
+
 public class Gasto {
 
     //region #Attributes

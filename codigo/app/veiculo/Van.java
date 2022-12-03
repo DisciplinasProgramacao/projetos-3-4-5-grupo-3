@@ -1,9 +1,11 @@
+package app.veiculo;
+
 import java.util.ArrayList;
 
 public class Van extends Veiculo {
 
     //atributos
-    private static final String TIPO = "Van";
+    private static final String TIPO = "app.veiculo.Van";
     public static final double CAPACIDADE_TANQUE = 60;
     private static final double TAXA_IPVA = 0.03;
     private static final double TAXA_SEGURO = 0.03;

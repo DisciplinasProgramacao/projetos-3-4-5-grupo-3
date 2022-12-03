@@ -1,3 +1,7 @@
+package app.veiculo;
+
+import app.fabricas.FabricaVeiculo;
+
 import java.io.*;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -48,7 +52,7 @@ public class Frota {
     }
 
     /**
-     * Método que recebe os dados do Veiculo e insere na frota.
+     * Método que recebe os dados do app.veiculo.Veiculo e insere na frota.
      *
      * @param dadosVeiculo String no formato String Tipo; double Preco; double kmMedia
      */
@@ -69,10 +73,10 @@ public class Frota {
     private String verificaTipoVeiculo(String linha) {
         String[] vetorDados = converteEmVetor(linha);
         return switch (vetorDados[INDEX_TIPO_VEICULO]) {
-            case "Carro" -> "Carro";
-            case "Furgao" -> "Furgao";
-            case "Van" -> "Van";
-            default -> "Caminhao";
+            case "app.veiculo.Carro" -> "app.veiculo.Carro";
+            case "app.veiculo.Furgao" -> "app.veiculo.Furgao";
+            case "app.veiculo.Van" -> "app.veiculo.Van";
+            default -> "app.veiculo.Caminhao";
         };
     }
 
@@ -143,7 +147,7 @@ public class Frota {
        return null;
     }
 
-    /* ordenação dos custos de veiculo em ordem decrescente */
+    /* ordenação dos custos de app.veiculo em ordem decrescente */
     public void ordenarCustoDecrescentes() {
         Collections.sort(listaVeiculos);
         System.out.println(listaVeiculos);

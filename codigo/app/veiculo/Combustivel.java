@@ -1,3 +1,5 @@
+package app.veiculo;
+
 public enum Combustivel {
 
     /* área para parâmetro de cada combustível */

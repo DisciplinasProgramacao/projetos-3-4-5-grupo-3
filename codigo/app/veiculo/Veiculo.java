@@ -1,3 +1,5 @@
+package app.veiculo;
+
 import java.util.ArrayList;
 
 public abstract class Veiculo implements Comparable<Veiculo> {
@@ -41,20 +43,20 @@ public abstract class Veiculo implements Comparable<Veiculo> {
 
 
     /**
-     * Método que calcula o IPVA do Veiculo de acordo com sua Categoria
+     * Método que calcula o IPVA do app.veiculo.Veiculo de acordo com sua Categoria
      *
      * @return Um double referente ao valor calculado do IPVA
      */
-    protected double getIpva() {
+    public double getIpva() {
         return taxaIPVA * valor;
     }
 
     /**
-     * Método que calcula o seguro do Veiculo de acordo com sua Categoria
+     * Método que calcula o seguro do app.veiculo.Veiculo de acordo com sua Categoria
      *
      * @return Um double referente ao valor calculado do Seguro
      */
-    protected double calcularSeguro() {
+    public double calcularSeguro() {
         return taxaSeguro * valor;
     }
 
@@ -78,9 +80,9 @@ public abstract class Veiculo implements Comparable<Veiculo> {
     //#region Metodos Públicos
 
     /**
-     * Método que adiciona uma Rota ao Veículo
+     * Método que adiciona uma app.veiculo.Rota ao Veículo
      *
-     * @param rota A rota a ser adicionada ao Veiculo
+     * @param rota A rota a ser adicionada ao app.veiculo.Veiculo
      * @return TRUE se a KM total com a adição da rota for menor que a autonomia diária, False se com a adição da rota, a KM total for maior que a autonomia do Veículo
      */
     public boolean addRota(Rota rota) {
@@ -147,6 +149,10 @@ public abstract class Veiculo implements Comparable<Veiculo> {
             return 1;
         }
         return 0;
+    }
+
+    public String getTipo() {
+        return this.tipo;
     }
 
     //endregion

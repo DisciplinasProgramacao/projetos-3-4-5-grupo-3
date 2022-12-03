@@ -1,3 +1,8 @@
+package app.test;
+
+import app.veiculo.Caminhao;
+import app.veiculo.Rota;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -17,18 +22,18 @@ public class CaminhaoTest {
 
     @Test
     public void calculaIpvaCerto() {
-        assertEquals(10, caminhao.getIpva());
+        Assertions.assertEquals(10, caminhao.getIpva());
     }
 
     @Test
     public void calculaSeguroCerto() {
-        assertEquals(2020, caminhao.calcularSeguro());
+        Assertions.assertEquals(2020, caminhao.calcularSeguro());
     }
 
     @Test
     public void adicionaRotaCorreta() {
-        assertTrue(caminhao.addRota(new Rota(("04/11/2011"), 1250)));
-        assertFalse(caminhao.addRota(new Rota("04/11/2011", 1500)));
+        Assertions.assertTrue(caminhao.addRota(new Rota(("04/11/2011"), 1250)));
+        Assertions.assertFalse(caminhao.addRota(new Rota("04/11/2011", 1500)));
     }
 
 

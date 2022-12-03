@@ -1,3 +1,5 @@
+package app.veiculo;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -10,7 +12,7 @@ public class Rota {
 
     //#endregion
     //#region Construtor
-    Rota(String data, double distancia) {
+    public Rota(String data, double distancia) {
         String[] vetorData = data.split("/");
         this.data = new Date(Integer.parseInt(vetorData[2]), Integer.parseInt(vetorData[1]), Integer.parseInt(vetorData[0]));
         this.distancia = distancia;

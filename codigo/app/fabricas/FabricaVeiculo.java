@@ -1,20 +1,24 @@
+package app.fabricas;
+
+import app.veiculo.*;
+
 public class FabricaVeiculo {
-    /* Fábrica genérica que engloba a criação de um veiculo qualquer*/
+    /* Fábrica genérica que engloba a criação de um app.veiculo qualquer*/
     static Veiculo criarVeiculo(String tipo, double preco, String placa) throws Exception {
         switch (tipo) {
-            case "Caminhao" -> {
+            case "app.veiculo.Caminhao" -> {
                 return new Caminhao(preco, placa);
             }
 
-            case "Carro" -> {
+            case "app.veiculo.Carro" -> {
                 return new Carro(preco, placa);
             }
 
-            case "Furgao" -> {
+            case "app.veiculo.Furgao" -> {
                 return new Furgao(preco, placa);
             }
 
-            case "Van" -> {
+            case "app.veiculo.Van" -> {
                 return new Van(preco, placa);
             }
 

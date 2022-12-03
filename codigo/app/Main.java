@@ -1,3 +1,9 @@
+package app;
+
+import app.veiculo.Frota;
+import app.veiculo.Rota;
+import app.veiculo.Veiculo;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.Scanner;
@@ -46,7 +52,7 @@ public class Main {
         System.out.println(frota.maisRotas());
     }
 
-    /* método para adicionar gasto em determinado veiculo */
+    /* método para adicionar gasto em determinado app.veiculo */
     private static void adicionarGasto() {
         Veiculo veiculo = frota.procurar(perguntaPlaca());
         Scanner teclado = new Scanner(System.in);
@@ -85,7 +91,7 @@ public class Main {
             System.out.println("[3] -> Incluir um novo veículo");
             System.out.println("[4] -> Incluir rotas para um veículo");
             System.out.println("[5] -> Localizar um veículo da frota");
-            System.out.println("[6] -> Incluir gasto ao veiculo");
+            System.out.println("[6] -> Incluir gasto ao app.veiculo");
             System.out.println("[7] -> Imprimir um relatório do veículo com seus gastos até o momento");
             System.out.println("[8] -> Imprimir a Quilometragem média de todas as rotas da empresa ");
             System.out.println("[9] -> Imprimir a lista de veiculos ordenadas por gasto");
@@ -100,7 +106,7 @@ public class Main {
         * incluir
         * salvar
         * incluir rota
-        * localizar veiculo
+        * localizar app.veiculo
         * imprimir relatorio
      */
     private static void salvarVeiculos() throws IOException {
@@ -129,19 +135,19 @@ public class Main {
     private static void localizarVeiculo() {
         Veiculo veiculoProcurado = frota.procurar(perguntaPlaca());
         if (veiculoProcurado == null)
-            System.out.println("O veiculo não existe na frota");
+            System.out.println("O app.veiculo não existe na frota");
     }
 
     private static void imprimeRelatorio() {
         Veiculo veiculoProcurar = frota.procurar(perguntaPlaca());
         if (veiculoProcurar == null)
-            System.out.println("O veiculo não existe na rota");
+            System.out.println("O app.veiculo não existe na rota");
         else System.out.println(veiculoProcurar);
     }
 
     private static String perguntaPlaca() {
         Scanner teclado = new Scanner(System.in);
-        System.out.println("Digite a placa do veiculo");
+        System.out.println("Digite a placa do app.veiculo");
         return teclado.next();
     }
 }

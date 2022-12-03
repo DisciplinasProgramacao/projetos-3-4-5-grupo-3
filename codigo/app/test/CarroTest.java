@@ -1,15 +1,20 @@
+package app.test;
+
+import app.veiculo.Carro;
+import app.veiculo.Rota;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class FurgaoTest {
+public class CarroTest {
 
-    static Furgao furgao;
+    static Carro carro;
 
     static {
         try {
-            furgao = new Furgao(1000,"FRNG6X1");
+            carro = new Carro(1000,"FRNG6X1");
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -17,20 +22,18 @@ public class FurgaoTest {
 
     @Test
     public void calculaIpvaCerto() {
-        assertEquals(30, furgao.getIpva());
+        Assertions.assertEquals(40, carro.getIpva());
     }
 
     @Test
     public void calculaSeguroCerto() {
-        assertEquals(30, furgao.calcularSeguro());
+        Assertions.assertEquals(350, carro.calcularSeguro());
     }
 
     @Test
     public void adicionaRotaCorreta() {
-        assertTrue(furgao.addRota(new Rota("04/11/2011", 400)));
-        assertFalse(furgao.addRota(new Rota("04/11/2011", 800)));
+        Assertions.assertTrue(carro.addRota(new Rota("04/12/2011", 250)));
+        Assertions.assertFalse(carro.addRota(new Rota("04/12/2011", 500)));
     }
 
-
 }
-

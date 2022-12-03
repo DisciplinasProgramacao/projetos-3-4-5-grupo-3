@@ -1,8 +1,11 @@
+package app.test;
+
+import app.veiculo.Frota;
+import app.veiculo.Rota;
+import app.veiculo.Veiculo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -13,20 +16,20 @@ public class FrotaTest {
 
     @Test
     void procurar() throws Exception {
-        frota.insereNaFrota("Carro;FRNG6X1;1000;100000");
-        frota.insereNaFrota("Caminhao;FRNG6X2;1000;100000");
-        frota.insereNaFrota("Furgao;FRNG6X3;1000;100000");
-        frota.insereNaFrota("Van;FRNG6X4;1000;100000");
+        frota.insereNaFrota("app.veiculo.Carro;FRNG6X1;1000;100000");
+        frota.insereNaFrota("app.veiculo.Caminhao;FRNG6X2;1000;100000");
+        frota.insereNaFrota("app.veiculo.Furgao;FRNG6X3;1000;100000");
+        frota.insereNaFrota("app.veiculo.Van;FRNG6X4;1000;100000");
 
         Assertions.assertNotEquals(null, frota.procurar("FRNG6X1"));
     }
 
     @Test
     void maisRotas() throws Exception {
-        frota.insereNaFrota("Carro;FRNG6X1;1000;100000");
-        frota.insereNaFrota("Caminhao;FRNG6X2;1000;100000");
-        frota.insereNaFrota("Furgao;FRNG6X3;1000;100000");
-        frota.insereNaFrota("Van;FRNG6X4;1000;100000");
+        frota.insereNaFrota("app.veiculo.Carro;FRNG6X1;1000;100000");
+        frota.insereNaFrota("app.veiculo.Caminhao;FRNG6X2;1000;100000");
+        frota.insereNaFrota("app.veiculo.Furgao;FRNG6X3;1000;100000");
+        frota.insereNaFrota("app.veiculo.Van;FRNG6X4;1000;100000");
 
         ArrayList<Veiculo> listaResposta = new ArrayList<>();
         listaResposta.add(frota.procurar("FRNG6X2"));
@@ -35,17 +38,17 @@ public class FrotaTest {
 
 
         frota.listaVeiculos.forEach(veiculo -> {
-            switch (veiculo.tipo) {
-                case "Carro" -> veiculo.listaRotas.add(new Rota("01/01/2022", 100));
-                case "Furgao" -> {
+            switch (veiculo.getTipo()) {
+                case "app.veiculo.Carro" -> veiculo.listaRotas.add(new Rota("01/01/2022", 100));
+                case "app.veiculo.Furgao" -> {
                     veiculo.listaRotas.add(new Rota("01/02/2022", 95));
                     veiculo.listaRotas.add(new Rota("01/03/2022", 95));
                 }
-                case "Van" -> {
+                case "app.veiculo.Van" -> {
                     veiculo.listaRotas.add(new Rota("01/03/2022", 95));
                     veiculo.listaRotas.add(new Rota("01/03/2022", 95));
                 }
-                case "Caminhao" -> {{
+                case "app.veiculo.Caminhao" -> {{
                     veiculo.listaRotas.add(new Rota("01/02/2022", 85));
                     veiculo.listaRotas.add(new Rota("01/03/2022", 95));
                 }}
@@ -57,10 +60,10 @@ public class FrotaTest {
 
     @Test
     void custoDecrescente() throws Exception {
-        frota.insereNaFrota("Carro;FRNG6X1;1000;100000");
-        frota.insereNaFrota("Caminhao;FRNG6X2;1000;100000");
-        frota.insereNaFrota("Furgao;FRNG6X3;1000;100000");
-        frota.insereNaFrota("Van;FRNG6X4;1000;100000");
+        frota.insereNaFrota("app.veiculo.Carro;FRNG6X1;1000;100000");
+        frota.insereNaFrota("app.veiculo.Caminhao;FRNG6X2;1000;100000");
+        frota.insereNaFrota("app.veiculo.Furgao;FRNG6X3;1000;100000");
+        frota.insereNaFrota("app.veiculo.Van;FRNG6X4;1000;100000");
 
         ArrayList<Veiculo> listaResposta = new ArrayList<>();
         listaResposta.add(frota.procurar("FRNG6X2"));
@@ -69,17 +72,17 @@ public class FrotaTest {
 
 
         frota.listaVeiculos.forEach(veiculo -> {
-            switch (veiculo.tipo) {
-                case "Carro" -> veiculo.listaRotas.add(new Rota("01/01/2022", 100));
-                case "Furgao" -> {
+            switch (veiculo.getTipo()) {
+                case "app.veiculo.Carro" -> veiculo.listaRotas.add(new Rota("01/01/2022", 100));
+                case "app.veiculo.Furgao" -> {
                     veiculo.listaRotas.add(new Rota("01/02/2022", 95));
                     veiculo.listaRotas.add(new Rota("01/03/2022", 95));
                 }
-                case "Van" -> {
+                case "app.veiculo.Van" -> {
                     veiculo.listaRotas.add(new Rota("01/03/2022", 95));
                     veiculo.listaRotas.add(new Rota("01/03/2022", 95));
                 }
-                case "Caminhao" -> {{
+                case "app.veiculo.Caminhao" -> {{
                     veiculo.listaRotas.add(new Rota("01/02/2022", 85));
                     veiculo.listaRotas.add(new Rota("01/03/2022", 95));
                 }}
@@ -91,10 +94,10 @@ public class FrotaTest {
 
     @Test
     void rotasPorData() throws Exception {
-        frota.insereNaFrota("Carro;FRNG6X1;1000;100000");
-        frota.insereNaFrota("Caminhao;FRNG6X2;1000;100000");
-        frota.insereNaFrota("Furgao;FRNG6X3;1000;100000");
-        frota.insereNaFrota("Van;FRNG6X4;1000;100000");
+        frota.insereNaFrota("app.veiculo.Carro;FRNG6X1;1000;100000");
+        frota.insereNaFrota("app.veiculo.Caminhao;FRNG6X2;1000;100000");
+        frota.insereNaFrota("app.veiculo.Furgao;FRNG6X3;1000;100000");
+        frota.insereNaFrota("app.veiculo.Van;FRNG6X4;1000;100000");
 
         ArrayList<Veiculo> listaResposta = new ArrayList<>();
         listaResposta.add(frota.procurar("FRNG6X2"));
@@ -103,17 +106,17 @@ public class FrotaTest {
 
 
         frota.listaVeiculos.forEach(veiculo -> {
-            switch (veiculo.tipo) {
-                case "Carro" -> veiculo.listaRotas.add(new Rota("01/01/2022", 100));
-                case "Furgao" -> {
+            switch (veiculo.getTipo()) {
+                case "app.veiculo.Carro" -> veiculo.listaRotas.add(new Rota("01/01/2022", 100));
+                case "app.veiculo.Furgao" -> {
                     veiculo.listaRotas.add(new Rota("01/02/2022", 95));
                     veiculo.listaRotas.add(new Rota("01/03/2022", 95));
                 }
-                case "Van" -> {
+                case "app.veiculo.Van" -> {
                     veiculo.listaRotas.add(new Rota("01/03/2022", 95));
                     veiculo.listaRotas.add(new Rota("01/03/2022", 95));
                 }
-                case "Caminhao" -> {{
+                case "app.veiculo.Caminhao" -> {{
                     veiculo.listaRotas.add(new Rota("01/02/2022", 85));
                     veiculo.listaRotas.add(new Rota("01/03/2022", 95));
                 }}
