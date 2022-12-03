@@ -1,0 +1,26 @@
+# Projeto 3 - Frota fase 1
+
+## Nota: 10,2
+
+## Comentários
+	- Um main *não pode* pedir ao usuário _"no formato Tipo;Placa;PRECO;KM MEDIA"_ . Quem usa o main é o operador do sistema e deve digitar dados naturalmente.
+	- Praticamente sem documentação: não sei o que é "Tipo" na criação do veículo (string? int?)
+	- Deu exceção tanto para int como para string "carro". Com isso, não consegui executar nada no main, a nota vai por inspeção de código. 
+	
+### Modelagem: 0/2 pontos. 
+	- não encontrei diagrama no commit. 
+	
+	
+### Implementação dos requisitos de acordo com a modelagem: 6/6 pontos. 
+	- Adicionar rota (com autonomia)  2/2 
+	- IPVA  1/1
+	- Seguro 1/1
+	- Outros custos 2/2
+	
+
+### Programa principal e seus requisitos: 4,2/7 pontos.
+	- Carregar e salvar  1/2: salvar devia ser da frota, não manualmente.
+	- Incluir veículo 	0,6/1: lógica ok, entrada no main não.
+	- Incluir rotas em veículo 0,6/1: lógica parece ok, no main não consegui 
+	- Localizar um veículo 0,6/1: lógica parece ok, no main não consegui 
+	- Imprimir um relatório do veículo 1,2/2: lógica parece ok, no main não consegui 
