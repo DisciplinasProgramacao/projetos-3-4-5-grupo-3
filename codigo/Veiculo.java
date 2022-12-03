@@ -24,8 +24,8 @@ public abstract class Veiculo implements Comparable<Veiculo> {
             double taxaIPVA,
             double taxaSeguro,
             Combustivel combustivel,
-            ArrayList<String> tiposCombustivel
-    ) {
+            ArrayList<Combustivel> tiposCombustivel
+    ) throws Exception {
         this.tipo = tipo;
         this.placa = placa;
         this.tanque = new Tanque(capacidadeTanque, combustivel, tiposCombustivel);
@@ -111,7 +111,7 @@ public abstract class Veiculo implements Comparable<Veiculo> {
         return tipo + " " + placa + " Gastos totais: " + getGastoTotal() + "Rotas: " + listaRotas.size() + "\n";
     }
 
-    public boolean abastecer(double distanciaRota, String tipoCombustivel, double quantidade) throws Exception {
+    public boolean abastecer(double distanciaRota, Combustivel tipoCombustivel, double quantidade) throws Exception {
         double distanciaPossivel = this.tanque.getNivelTanque() * this.tanque.getCombustivel().getConsumo();
         if (distanciaPossivel < distanciaRota) {
             double valorAbastecer = this.tanque.encherTanque(tipoCombustivel, quantidade) * this.tanque.getCombustivel().getPreco();

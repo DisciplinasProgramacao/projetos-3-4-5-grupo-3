@@ -9,14 +9,10 @@ public class Tanque {
 
     private double nivelTanque;
 
-    public Tanque(double capacidadeTanque, Combustivel combustivel, ArrayList<String> tiposCombustivel) {
+    public Tanque(double capacidadeTanque, Combustivel combustivel, ArrayList<Combustivel> tiposCombustivel) throws Exception {
         this.capacidadeMaxTanque = capacidadeTanque;
-        this.nivelTanque = capacidadeMaxTanque;
         this.tiposCombustivel.addAll(tiposCombustivel);
-        tiposCombustivel.forEach(tc -> {
-            if(tc.equals(combustivel.getNomeCombustivel()))
-                this.combustivel = combustivel;
-        });
+        this.encherTanque(combustivel, capacidadeTanque);
     }
 
     public Combustivel getCombustivel() {
@@ -28,34 +24,24 @@ public class Tanque {
     }
 
     public double encherTanque(Combustivel tipoCombustivel, double quantidade) throws Exception {
-        //alterar dados string to combustivel
+        double qntTotal = this.capacidadeMaxTanque - this.nivelTanque;
 
-        double qntTotal = 0;
-        if(this.tiposCombustivel.contains(tipoCombustivel)){
-
-         } else excecao;
-
-
-        for( String tc : this.tiposCombustivel) {
-            if (tc.equals(tipoCombustivel)) {
-                if (this.combustivel.getNomeCombustivel().equals(tipoCombustivel) && this.nivelTanque != 0) {
-                    qntTotal = this.capacidadeMaxTanque - this.nivelTanque;
-                    if (qntTotal < quantidade) {
-                        this.nivelTanque += qntTotal;
-                        return qntTotal;
-                    } else {
-                        this.nivelTanque += quantidade;
-                        return quantidade;
-                    }
+        if(this.tiposCombustivel.contains(tipoCombustivel)) {
+            if (this.combustivel.equals(tipoCombustivel) && this.nivelTanque != 0) {
+                if (qntTotal < quantidade) {
+                    this.nivelTanque += qntTotal;
+                    return qntTotal;
                 } else {
-                    this.nivelTanque = this.capacidadeMaxTanque;
-                    return this.capacidadeMaxTanque;
+                    this.nivelTanque += quantidade;
+                    return quantidade;
                 }
-
+            } else {
+                this.nivelTanque += quantidade;
+                return quantidade;
             }
+        } else {
+            throw new Exception("Tipo não compativel");
         }
-        throw new Exception("Tipo não compativel");
-
     }
 
     public double getNivelTanque() {
