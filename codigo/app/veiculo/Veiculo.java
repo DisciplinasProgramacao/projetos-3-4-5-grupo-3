@@ -90,7 +90,6 @@ public abstract class Veiculo implements Comparable<Veiculo> {
             listaRotas.add(rota);
             double valorUtilizado = rota.getDistancia() / this.tanque.getCombustivel().getConsumo();
             this.tanque.utilizarGasolina(valorUtilizado);
-            System.out.println(this.tanque.getNivelTanque());
             adicionarGasto("combustivel", (this.tanque.getCombustivel().getPreco() * valorUtilizado));
             return true;
         }

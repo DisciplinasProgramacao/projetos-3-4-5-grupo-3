@@ -96,13 +96,13 @@ public class Frota {
     }
 
     public Veiculo procurar(String placaProcurar) {
-        return this.listaVeiculos.stream()
-                .filter(v -> {
-                    System.out.println(v.getPlaca());
-                    return v.getPlaca().equals(placaProcurar);
-                })
-                .findFirst()
-                .get();
+        try {
+            return this.listaVeiculos.stream()
+                    .filter(v -> v.getPlaca().equals(placaProcurar))
+                    .findFirst().get();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 
@@ -123,6 +123,7 @@ public class Frota {
 
     //método que calcula a km media de rotas
     public void kmMediaDasRotas() {
+        /*fazer um stream no veiculo para somar todas rotas e devolver*/
         int qtdRotas = 0;
         double totalRotas = 0;
         for (Veiculo veiculo : listaVeiculos) {
